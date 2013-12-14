@@ -20,9 +20,40 @@ namespace Player
     /// </summary>
     public partial class MainWindow : Window
     {
+        ISwitchable currentView;
+
         public MainWindow()
         {
             InitializeComponent();
+            ViewSwitcher.SetMainWindow(this);
+            ViewSwitcher.Switch(new player());
+        }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape || e.Key == Key.Q)
+            {
+                currentView.Destroy();
+                this.Close();
+            }
+        }
+
+        public void Navigate(UserControl view)
+        {
+            if (currentView != null)
+                currentView.Destroy();
+
+            currentView = view as ISwitchable;
+            mainContent.Children.Clear();
+            mainContent.Children.Add(view);
+        }
+
+        public void Navigate(UserControl view, object state)
+        {
+            Navigate(view);
+
+            if (currentView != null)
+                currentView.UtilizeState(state);
         }
     }
 }

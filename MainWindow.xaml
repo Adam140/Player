@@ -1,8 +1,6 @@
 ﻿<Window x:Class="Player.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="500" Width="525" KeyUp="Window_KeyUp" ResizeMode="NoResize">
+    <Grid Name="mainContent"/>
 </Window>
