@@ -55,5 +55,16 @@ namespace Player
             if (currentView != null)
                 currentView.UtilizeState(state);
         }
+
+        private void KinectButtonLanguage(object sender, RoutedEventArgs e)
+        {
+            Console.Out.WriteLine("Pressed the button language ");
+
+        }
+        private void KinectButtonHelp(object sender, RoutedEventArgs e)
+        {
+            Console.Out.WriteLine("Pressed the button help ");
+
+        }
     }
 }
