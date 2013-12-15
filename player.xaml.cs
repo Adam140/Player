@@ -35,5 +35,10 @@ namespace Player
         {
 
         }
+
+        private void KinectButtonPlayer(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

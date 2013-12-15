@@ -135,7 +135,27 @@
     <Resource Include="Resources\background.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\questionmark.png" />
+    <Resource Include="Resources\pause_icon.png" />
+    <Resource Include="Resources\play_icon.png" />
+    <Resource Include="Resources\stop_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\help_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Player_icon\forward.png" />
+    <Resource Include="Resources\Player_icon\pause.png" />
+    <Resource Include="Resources\Player_icon\play.png" />
+    <Resource Include="Resources\Player_icon\rewind.png" />
+    <Resource Include="Resources\Player_icon\stop.png" />
+    <Resource Include="Resources\Player_icon\super-mono-3d-part2-79.png" />
+    <Resource Include="Resources\Player_icon\super-mono-3d-part2-80.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\pattern.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -4,10 +4,10 @@
         xmlns:k="http://schemas.microsoft.com/kinect/2013"
         Title="MainWindow" Height="600" Width="600" WindowStyle="None" KeyUp="Window_KeyUp">
     <Window.Background>
-        <ImageBrush ImageSource="Resources/background.png" TileMode="FlipY" 
+        <ImageBrush ImageSource="Resources/pattern.png" TileMode="Tile" 
             Stretch="Uniform"
             AlignmentY="Top"
-            Viewport="0,0,531,337"
+            Viewport="0,0,84,84"
             ViewportUnits="Absolute" />
     </Window.Background>
     <Grid>
@@ -15,21 +15,25 @@
             <RowDefinition Height="10*"/>
             <RowDefinition Height="90*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="0">
-            <k:KinectTileButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonFlag" Click="KinectButtonLanguage" BorderBrush="{x:Null}">
-                <k:KinectTileButton.Background>
-                    <ImageBrush ImageSource="/Player;component/Resources/flag_uk.png" TileMode="FlipXY"/>
-                </k:KinectTileButton.Background>
-            </k:KinectTileButton>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0">
-            <k:KinectTileButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonHelp" Click="KinectButtonHelp" BorderBrush="{x:Null}">
-                <k:KinectTileButton.Background>
-                    <ImageBrush ImageSource="Resources/questionmark.png" TileMode="FlipXY"/>
-                </k:KinectTileButton.Background>
-            </k:KinectTileButton>
-        </StackPanel>
-
+        <Grid>
+            <Grid.Background>
+                <SolidColorBrush Color="Black" Opacity="0.4"/>
+            </Grid.Background>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="0">
+                <k:KinectTileButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonFlag" Click="KinectButtonLanguage" BorderBrush="{x:Null}" Margin="10,0,0,0">
+                    <k:KinectTileButton.Background>
+                        <ImageBrush ImageSource="/Player;component/Resources/flag_uk.png" TileMode="FlipXY"/>
+                    </k:KinectTileButton.Background>
+                </k:KinectTileButton>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0">
+                <k:KinectTileButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonHelp" Click="KinectButtonHelp" BorderBrush="{x:Null}" Margin="0,0,10,0">
+                    <k:KinectTileButton.Background>
+                        <ImageBrush ImageSource="Resources/help.png" TileMode="FlipXY"/>
+                    </k:KinectTileButton.Background>
+                </k:KinectTileButton>
+            </StackPanel>
+        </Grid>
         <Grid Grid.Row="1" Name="mainContent"/>
     </Grid>
 </Window>

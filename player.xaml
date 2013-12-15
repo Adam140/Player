@@ -3,18 +3,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:k="http://schemas.microsoft.com/kinect/2013"
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="200">
-    <Grid>
+             d:DesignHeight="300" d:DesignWidth="800">
+    <Grid Margin="10,0,10,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="90*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-        <StackPanel HorizontalAlignment="Left" Grid.Row="1" Orientation="Horizontal">
-            <Button Content="play" Margin="0,0,10,0"/>
-            <Button Content="stop" Margin="0,0,10,0"/>
-            <Button Content="pause" Margin="0,0,10,0"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <StackPanel.Background>
+                <SolidColorBrush Color="Black" Opacity="0.4"/>
+            </StackPanel.Background>
+            <k:KinectTileButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonPlay" Click="KinectButtonPlayer" BorderBrush="{x:Null}" Margin="0,0,20,0">
+                <k:KinectTileButton.Background>
+                    <ImageBrush ImageSource="Resources/Player_icon/play.png" TileMode="FlipXY"/>
+                </k:KinectTileButton.Background>
+            </k:KinectTileButton>
+            <k:KinectTileButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonPause" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,20,0">
+                <k:KinectTileButton.Background>
+                    <ImageBrush ImageSource="Resources/Player_icon/pause.png" TileMode="FlipXY"/>
+                </k:KinectTileButton.Background>
+            </k:KinectTileButton>
+            <k:KinectTileButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonStop" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,20,0">
+                <k:KinectTileButton.Background>
+                    <ImageBrush ImageSource="Resources/Player_icon/stop.png" TileMode="FlipXY"/>
+                </k:KinectTileButton.Background>
+            </k:KinectTileButton>
+            <k:KinectTileButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonRewind" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,20,0">
+                <k:KinectTileButton.Background>
+                    <ImageBrush ImageSource="Resources/Player_icon/rewind.png" TileMode="FlipXY"/>
+                </k:KinectTileButton.Background>
+            </k:KinectTileButton>
+            <k:KinectTileButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonForward" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,20,0">
+                <k:KinectTileButton.Background>
+                    <ImageBrush ImageSource="Resources/Player_icon/forward.png" TileMode="FlipXY"/>
+                </k:KinectTileButton.Background>
+            </k:KinectTileButton>
         </StackPanel>
-
     </Grid>
 </UserControl>
