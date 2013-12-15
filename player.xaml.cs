@@ -22,9 +22,8 @@ namespace Player
     /// Interaction logic for screen1.xaml
     /// </summary>
     public partial class player : UserControl, ISwitchable
-    {
-        static String dir = @"C:\Users\Adam\Documents\GitHub\Player\Multimedia";
-        String[] filesList = Directory.GetFiles(dir);
+    {      
+        String[] filesList;
         int currentFileIndex = 0;
         Boolean isDragging = false;
         DispatcherTimer timer;
@@ -37,7 +36,17 @@ namespace Player
             timer.Tick += new EventHandler(timer_Tick);
         }
 
-        public void UtilizeState(object state)
+        public player(String mainDir) : this()
+        {
+            filesList = Directory.GetFiles(mainDir);
+        }
+
+        public player(String[] filesList) : this()
+        {
+            this.filesList = filesList;
+        }
+
+        public void UtilizeState(object mainDir)
         {
 
         }

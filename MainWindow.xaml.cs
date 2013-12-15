@@ -21,12 +21,13 @@ namespace Player
     public partial class MainWindow : Window
     {
         ISwitchable currentView;
+        static String dir = @"C:\Users\Adam\Documents\GitHub\Player\Multimedia";
 
         public MainWindow()
         {
             InitializeComponent();
             ViewSwitcher.SetMainWindow(this);
-            ViewSwitcher.Switch(new player());
+            ViewSwitcher.Switch(new player(dir));
         }
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
