@@ -27,11 +27,11 @@
                 </k:KinectTileButton>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0">
-                <k:KinectTileButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonHelp" Click="KinectButtonHelp" BorderBrush="{x:Null}" Margin="0,0,10,0">
-                    <k:KinectTileButton.Background>
+                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonHelp" Click="KinectButtonHelp" BorderBrush="{x:Null}" Margin="0,0,10,0"  ContentForeground="{x:Null}" Foreground="{x:Null}">
+                    <k:KinectCircleButton.Background>
                         <ImageBrush ImageSource="Resources/help.png" TileMode="FlipXY"/>
-                    </k:KinectTileButton.Background>
-                </k:KinectTileButton>
+                    </k:KinectCircleButton.Background>
+                </k:KinectCircleButton>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1" Name="mainContent"/>

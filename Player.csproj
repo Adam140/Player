@@ -148,14 +148,21 @@
     <Resource Include="Resources\Player_icon\play.png" />
     <Resource Include="Resources\Player_icon\rewind.png" />
     <Resource Include="Resources\Player_icon\stop.png" />
-    <Resource Include="Resources\Player_icon\super-mono-3d-part2-79.png" />
-    <Resource Include="Resources\Player_icon\super-mono-3d-part2-80.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\help.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\pattern.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Multimedia\video.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Multimedia\WP_20131123_010.mp4" />
+    <Resource Include="Resources\Player_icon\first.png" />
+    <Resource Include="Resources\Player_icon\last.png" />
+    <Resource Include="Resources\pattern2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
