@@ -115,15 +115,16 @@
                     <ColumnDefinition Width="85*"/>
                     <ColumnDefinition Width="15*"/>
                 </Grid.ColumnDefinitions>
-
+                <Image Grid.Row="0" Grid.ColumnSpan="2" Source="Multimedia/king.jpg"/>
                 <MediaElement  Grid.Row="0" Grid.ColumnSpan="2" Name="mediaElement" Width="Auto" LoadedBehavior="Manual" UseLayoutRounding="True" 
-                                   Volume="1" UnloadedBehavior="Stop" Height="Auto" MediaOpened="mediaOpened" MediaEnded="mediaEnded"/>
-                    <Slider ValueChanged="SeekToMediaPosition" Name="slider" IsMoveToPointEnabled="True" HorizontalContentAlignment="Stretch" Grid.Row="1" Grid.Column="0" VerticalContentAlignment="Center" Margin="20,0,10,0" VerticalAlignment="Center" Visibility="Hidden"/>
+                                   Volume="1" UnloadedBehavior="Stop" Height="Auto" MediaOpened="mediaOpened" MediaEnded="mediaEnded" Visibility="Hidden"/>
+                 <Slider ValueChanged="SeekToMediaPosition" Name="slider" IsMoveToPointEnabled="True" HorizontalContentAlignment="Stretch" Grid.Row="1" Grid.Column="0" VerticalContentAlignment="Center" Margin="20,0,10,0" VerticalAlignment="Center" Visibility="Hidden"/>
                 <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,0,10,0" Orientation="Horizontal" HorizontalAlignment="Center">
                     <Label Name="passedTime" Padding="0,5" Foreground="White" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
                     <Label Name="totalTime" Padding="0,5" Foreground="White" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
                     
                 </StackPanel>
+                
 
             </Grid>
 <!-- 
@@ -132,8 +133,11 @@
      ***********************************************************
 -->
 
-            <Grid Name="photoGrid" Visibility="Hidden">
-                    
+            <Grid Name="photoGrid" Grid.Column="1" Background="Black" Margin="0,15" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="70*"/>
+                </Grid.RowDefinitions>
             </Grid>
                 
  

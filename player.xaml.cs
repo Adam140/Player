@@ -32,7 +32,7 @@ namespace Player
         {
             InitializeComponent();
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(200);
+            timer.Interval = TimeSpan.FromMilliseconds(400);
             timer.Tick += new EventHandler(timer_Tick);
         }
 
@@ -65,6 +65,10 @@ namespace Player
                 case "buttonPlay":
                     if(mediaElement.Source == null)
                     {
+                        //TagLib.File tagFile = TagLib.File.Create(filesList[currentFileIndex]);
+                        //string artist = tagFile.Tag.FirstAlbumArtist;
+                        //string album = tagFile.Tag.Album;
+                        //string title = tagFile.Tag.Title;
                         mediaElement.Source = new Uri(filesList[currentFileIndex], UriKind.Relative);
                         slider.Visibility = Visibility.Visible;
                     }
@@ -74,7 +78,7 @@ namespace Player
                     break;
                 case "buttonStop":
                     mediaElement.Stop();
-                    passedTime.Content = mediaElement.Position.ToString(@"mm\:ss");
+                    passedTime.Content = "00:00";
                     timer.Stop();
                     break;
                 case "buttonPause":
@@ -123,8 +127,9 @@ namespace Player
 
         void timer_Tick(object sender, EventArgs e)
         {
-                slider.Value = mediaElement.Position.TotalMilliseconds;
-                passedTime.Content = mediaElement.Position.ToString(@"mm\:ss");
+            TimeSpan ts = mediaElement.Position;
+            slider.Value = ts.TotalMilliseconds;
+            passedTime.Content = ts.ToString(@"mm\:ss");
         }
 
         private void mediaEnded(object sender, RoutedEventArgs e)
