@@ -21,6 +21,7 @@ namespace Player
     public partial class MainWindow : Window
     {
         ISwitchable currentView;
+        String currentViewName;
 
         public Menu mainMenu;
         public player playerScreen;
@@ -47,13 +48,14 @@ namespace Player
             if (currentView != null)
                 currentView.Destroy();
 
-            if (view.Name == "MainMenu")
+            if (view.Name == "MainScreen")
                 buttonBack.Visibility = Visibility.Collapsed;
             else
                 buttonBack.Visibility = Visibility.Visible;
 
             helpContent.Visibility = Visibility.Hidden;
             currentView = view as ISwitchable;
+            currentViewName = view.Name;
             mainContent.Children.Clear();
             mainContent.Children.Add(view);
         }
@@ -95,7 +97,16 @@ namespace Player
                     break;
                 case "buttonHelp":
                     helpContent.Visibility = Visibility.Visible;
-                    // TODO depended of current page
+                    BitmapImage bi = new BitmapImage();
+                    bi.BeginInit();
+                    //TODO fix below if condition to looking if file exists in relative path
+                    if( System.IO.File.Exists(@"Resources/Help_pages/" + currentViewName + ".png"))
+                        bi.UriSource = new Uri(@"Resources/Help_pages/" + currentViewName + ".png", UriKind.Relative);   
+                    else
+                        bi.UriSource = new Uri(@"Resources/Help_pages/under-construction.gif", UriKind.Relative);
+                    
+                        bi.EndInit();
+                        imageHelp.Source = bi;
                     break;
             }
         }

@@ -174,7 +174,8 @@
     <Resource Include="Resources\pattern.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Help_pages\example.png" />
+    <Resource Include="Resources\Help_pages\under-construction.gif" />
+    <Resource Include="Resources\Help_pages\PlayerScreen.png" />
     <Resource Include="Resources\exit.png" />
     <Resource Include="Resources\Menu_icon\audio.png" />
     <Resource Include="Resources\Menu_icon\images.png" />

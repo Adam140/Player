@@ -187,8 +187,8 @@ namespace Player
                 mediaElement.Visibility = Visibility.Hidden;
                 playerControlGrid.Visibility = Visibility.Hidden;
                 photoControlGrid.Visibility = Visibility.Visible;
-                slider.Visibility = Visibility.Hidden;
-                timesLabel.Visibility = Visibility.Hidden;
+                slider.Visibility = Visibility.Collapsed;
+                timesLabel.Visibility = Visibility.Collapsed;
                 BitmapImage bi3 = new BitmapImage();
                 bi3.BeginInit();
                 bi3.UriSource = new Uri(file, UriKind.Absolute);
