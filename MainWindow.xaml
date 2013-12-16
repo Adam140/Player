@@ -20,20 +20,45 @@
                 <SolidColorBrush Color="Black" Opacity="0.4"/>
             </Grid.Background>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="0">
-                <k:KinectTileButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonFlag" Click="KinectButtonLanguage" BorderBrush="{x:Null}" Margin="10,0,0,0">
+                <k:KinectTileButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonBack" Click="KinectButtonTopBar" BorderBrush="{x:Null}" Margin="10,0,0,0" Visibility="Collapsed">
                     <k:KinectTileButton.Background>
-                        <ImageBrush ImageSource="/Player;component/Resources/flag_uk.png" TileMode="FlipXY"/>
+                        <ImageBrush ImageSource="/Player;component/Resources/back.png" TileMode="FlipXY"/>
                     </k:KinectTileButton.Background>
                 </k:KinectTileButton>
+                <k:KinectTileButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonVolumne" Click="KinectButtonTopBar" BorderBrush="{x:Null}" Margin="10,0,0,0">
+                    <k:KinectTileButton.Background>
+                        <ImageBrush ImageSource="/Player;component/Resources/volumne.png" TileMode="FlipXY"/>
+                    </k:KinectTileButton.Background>
+                </k:KinectTileButton>
+                <Slider Name="sliderVolumn" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" Width="200" ValueChanged="volumneChanged" Opacity="0.785" Value="10" IsMoveToPointEnabled="True"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0">
-                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonHelp" Click="KinectButtonHelp" BorderBrush="{x:Null}" Margin="0,0,10,0"  ContentForeground="{x:Null}" Foreground="{x:Null}">
+                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonHelp" Click="KinectButtonTopBar" BorderBrush="{x:Null}" Margin="0,0,10,0"  ContentForeground="{x:Null}" Foreground="{x:Null}">
                     <k:KinectCircleButton.Background>
                         <ImageBrush ImageSource="Resources/help.png" TileMode="FlipXY"/>
                     </k:KinectCircleButton.Background>
                 </k:KinectCircleButton>
+
             </StackPanel>
+
         </Grid>
         <Grid Grid.Row="1" Name="mainContent"/>
+        <Grid Grid.Row="1" Name="helpContent" Margin="50" Visibility="Hidden" >
+            <Grid.Background>
+                <SolidColorBrush Color="Black" Opacity="0.7"/>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="90*"/>
+            </Grid.RowDefinitions>
+            <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Center" HorizontalContentAlignment="Center" x:Name="buttonExit" Click="KinectButtonTopBar" BorderBrush="{x:Null}" Margin="0,0,10,0"  ContentForeground="{x:Null}" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <k:KinectCircleButton.Background>
+                    <ImageBrush ImageSource="Resources/exit.png" TileMode="FlipXY"/>
+                </k:KinectCircleButton.Background>
+            </k:KinectCircleButton>
+            <k:KinectScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ContentMargin="20" ClipToBounds="True">
+                <Image Source="Resources/Help_pages/example.png" />
+            </k:KinectScrollViewer>
+        </Grid>
     </Grid>
 </Window>

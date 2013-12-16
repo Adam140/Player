@@ -21,13 +21,16 @@ namespace Player
     public partial class MainWindow : Window
     {
         ISwitchable currentView;
-        static String dir = @"C:\Users\Adam\Documents\GitHub\Player\Multimedia";
+
+        public Menu mainMenu;
+        public player playerScreen;
 
         public MainWindow()
         {
             InitializeComponent();
             ViewSwitcher.SetMainWindow(this);
-            ViewSwitcher.Switch(new player(dir));
+            ViewSwitcher.Switch(mainMenu = new Menu(this));
+
         }
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
@@ -44,6 +47,12 @@ namespace Player
             if (currentView != null)
                 currentView.Destroy();
 
+            if (view.Name == "MainMenu")
+                buttonBack.Visibility = Visibility.Collapsed;
+            else
+                buttonBack.Visibility = Visibility.Visible;
+
+            helpContent.Visibility = Visibility.Hidden;
             currentView = view as ISwitchable;
             mainContent.Children.Clear();
             mainContent.Children.Add(view);
@@ -57,15 +66,47 @@ namespace Player
                 currentView.UtilizeState(state);
         }
 
-        private void KinectButtonLanguage(object sender, RoutedEventArgs e)
+        private void KinectButtonTopBar(object sender, RoutedEventArgs e)
         {
-            Console.Out.WriteLine("Pressed the button language ");
-
+            String name = ""; 
+            try
+            {
+                name = ((Microsoft.Kinect.Toolkit.Controls.KinectTileButton)e.OriginalSource).Name;
+            }
+            catch(InvalidCastException e1)
+            {
+                try
+                {
+                    name = ((Microsoft.Kinect.Toolkit.Controls.KinectCircleButton)e.OriginalSource).Name;
+                }
+                catch(InvalidCastException e2)
+                {
+                    MessageBoxResult result = MessageBox.Show("Event isn't from kinect button");   
+                }
+            }
+            
+            switch (name)
+            {
+                case "buttonBack":
+                    ViewSwitcher.Switch(mainMenu);
+                    break;
+                case "buttonExit":
+                    helpContent.Visibility = Visibility.Hidden;
+                    break;
+                case "buttonHelp":
+                    helpContent.Visibility = Visibility.Visible;
+                    // TODO depended of current page
+                    break;
+            }
         }
-        private void KinectButtonHelp(object sender, RoutedEventArgs e)
+
+        private void volumneChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            Console.Out.WriteLine("Pressed the button help ");
-
+            if(playerScreen != null)
+            {
+                playerScreen.mediaElement.Volume = sliderVolumn.Value / 10.0;
+            }
         }
+     
     }
 }

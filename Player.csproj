@@ -48,6 +48,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -59,15 +61,20 @@
     <Reference Include="taglib-sharp">
       <HintPath>packages\taglib.2.1.0.0\lib\taglib-sharp.dll</HintPath>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Menu.xaml.cs">
+      <DependentUpon>Menu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Playlist.xaml.cs">
       <DependentUpon>Playlist.xaml</DependentUpon>
     </Compile>
@@ -91,6 +98,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Menu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="player.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -163,7 +174,17 @@
     <Resource Include="Resources\pattern.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Multimedia\king.jpg" />
+    <Resource Include="Resources\Help_pages\example.png" />
+    <Resource Include="Resources\exit.png" />
+    <Resource Include="Resources\Menu_icon\audio.png" />
+    <Resource Include="Resources\Menu_icon\images.png" />
+    <Resource Include="Resources\Menu_icon\multimedia.png" />
+    <Resource Include="Resources\Menu_icon\settings.png" />
+    <Resource Include="Resources\Menu_icon\traffic.png" />
+    <Resource Include="Resources\Menu_icon\video.png" />
+    <Resource Include="Resources\back.png" />
+    <Resource Include="Resources\volumne.png" />
+    <Resource Include="Resources\blank_cover.png" />
     <Content Include="Multimedia\video.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

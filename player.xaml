@@ -16,7 +16,7 @@
                     Buttons for controling video
      ***********************************************************
 -->
-        <Grid Grid.Row="1" Name="videoControlGrid">
+        <Grid Grid.Row="1" Name="playerControlGrid" Visibility="Hidden">
             <Grid.Background>
                 <SolidColorBrush Color="Black" Opacity="0.6"/>
             </Grid.Background>
@@ -63,17 +63,17 @@
      ***********************************************************
 -->
         </Grid>
-        <Grid Grid.Row="1" Name="photoControlGrid" Visibility="Hidden">
+        <Grid Grid.Row="1" Name="photoControlGrid" Visibility="Visible">
             <Grid.Background>
                 <SolidColorBrush Color="Black" Opacity="0.6"/>
             </Grid.Background>
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonNext" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,20,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
+                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonPrevious" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,20,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
                     <k:KinectCircleButton.Background>
                         <ImageBrush ImageSource="Resources/Player_icon/rewind.png" TileMode="FlipXY"/>
                     </k:KinectCircleButton.Background>
                 </k:KinectCircleButton>
-                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonPrevious" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,0,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
+                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonNext" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,0,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
                     <k:KinectCircleButton.Background>
                         <ImageBrush ImageSource="Resources/Player_icon/forward.png" TileMode="FlipXY"/>
                     </k:KinectCircleButton.Background>
@@ -115,11 +115,11 @@
                     <ColumnDefinition Width="85*"/>
                     <ColumnDefinition Width="15*"/>
                 </Grid.ColumnDefinitions>
-                <Image Grid.Row="0" Grid.ColumnSpan="2" Source="Multimedia/king.jpg"/>
+                <Image Name="photoElement" Grid.Row="0" Grid.ColumnSpan="2"/>
                 <MediaElement  Grid.Row="0" Grid.ColumnSpan="2" Name="mediaElement" Width="Auto" LoadedBehavior="Manual" UseLayoutRounding="True" 
-                                   Volume="1" UnloadedBehavior="Stop" Height="Auto" MediaOpened="mediaOpened" MediaEnded="mediaEnded" Visibility="Hidden"/>
+                                   Volume="1" UnloadedBehavior="Stop" Height="Auto" MediaOpened="mediaOpened" MediaEnded="mediaEnded" ScrubbingEnabled="True"/>
                  <Slider ValueChanged="SeekToMediaPosition" Name="slider" IsMoveToPointEnabled="True" HorizontalContentAlignment="Stretch" Grid.Row="1" Grid.Column="0" VerticalContentAlignment="Center" Margin="20,0,10,0" VerticalAlignment="Center" Visibility="Hidden"/>
-                <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,0,10,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel Name="timesLabel" Grid.Row="1" Grid.Column="1" Margin="0,0,10,0" Orientation="Horizontal" HorizontalAlignment="Center">
                     <Label Name="passedTime" Padding="0,5" Foreground="White" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
                     <Label Name="totalTime" Padding="0,5" Foreground="White" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
                     
@@ -151,7 +151,6 @@
                 <Grid.Background>
                     <SolidColorBrush Color="Black" Opacity="0.3"/>
                 </Grid.Background>
-                <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Click="Button_Click" />
             </Grid>
         </Grid>
     </Grid>

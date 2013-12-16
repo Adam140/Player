@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,10 +23,11 @@ namespace Player
     /// Interaction logic for screen1.xaml
     /// </summary>
     public partial class player : UserControl, ISwitchable
-    {      
+    {
+        const String dir = @"C:\Users\Adam\Documents\GitHub\Player\Multimedia";    // folder where all multimedia files are stored
         String[] filesList;
+        String[] coversList;
         int currentFileIndex = 0;
-        Boolean isDragging = false;
         DispatcherTimer timer;
 
         public player()
@@ -36,14 +38,23 @@ namespace Player
             timer.Tick += new EventHandler(timer_Tick);
         }
 
-        public player(String mainDir) : this()
+        public player(String mainDir)
+            : this()
         {
+            if (mainDir == "" || mainDir == null)
+                mainDir = dir;
             filesList = Directory.GetFiles(mainDir);
+
+            coversList = Directory.GetFiles(mainDir, "cover_*");
+            filesList = (from file in filesList let name = System.IO.Path.GetFileNameWithoutExtension(file) where !name.StartsWith("cover_") select file).ToArray();
+            typeOfMedia(filesList[0], false);
         }
 
-        public player(String[] filesList) : this()
+        public player(String[] filesList)
+            : this()
         {
             this.filesList = filesList;
+            typeOfMedia(filesList[0], false);
         }
 
         public void UtilizeState(object mainDir)
@@ -63,18 +74,11 @@ namespace Player
             switch (name)
             {
                 case "buttonPlay":
-                    if(mediaElement.Source == null)
-                    {
-                        //TagLib.File tagFile = TagLib.File.Create(filesList[currentFileIndex]);
-                        //string artist = tagFile.Tag.FirstAlbumArtist;
-                        //string album = tagFile.Tag.Album;
-                        //string title = tagFile.Tag.Title;
-                        mediaElement.Source = new Uri(filesList[currentFileIndex], UriKind.Relative);
-                        slider.Visibility = Visibility.Visible;
-                    }
+                    if (mediaElement.Source == null)
+                        typeOfMedia(null, false);
                     mediaElement.Play();
                     timer.Start();
-                   
+
                     break;
                 case "buttonStop":
                     mediaElement.Stop();
@@ -86,13 +90,14 @@ namespace Player
                     timer.Stop();
                     break;
                 case "buttonRewind":
-                    mediaElement.Position -= new TimeSpan(0, 0, 0, 2, 0);;
+                    mediaElement.Position -= new TimeSpan(0, 0, 0, 2, 0); ;
                     break;
                 case "buttonForward":
-                    mediaElement.Position += new TimeSpan(0, 0, 0, 2, 0);;
+                    mediaElement.Position += new TimeSpan(0, 0, 0, 2, 0); ;
                     break;
+                case "buttonPrevious":
                 case "buttonFirst":
-                    if (mediaElement.Position.TotalSeconds > 2)
+                    if (mediaElement != null && mediaElement.Position.TotalSeconds > 2)
                     {
                         mediaElement.Stop();
                         mediaElement.Play();
@@ -101,16 +106,11 @@ namespace Player
                         nextToPlay(-1);
                     break;
                 case "buttonLast":
+                case "buttonNext":
                     nextToPlay(1);
                     break;
-                        
-            }
-        }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            videoControlGrid.Visibility = Visibility.Hidden;
-            photoControlGrid.Visibility = Visibility.Visible;
+            }
         }
 
         private void SeekToMediaPosition(object sender, RoutedPropertyChangedEventArgs<double> args)
@@ -119,13 +119,15 @@ namespace Player
             TimeSpan ts = new TimeSpan(0, 0, 0, 0, SliderValue);
             mediaElement.Position = ts;
         }
+            
         private void mediaOpened(object sender, EventArgs e)
         {
             slider.Maximum = mediaElement.NaturalDuration.TimeSpan.TotalMilliseconds;
+            passedTime.Content = "00:00";
             totalTime.Content = "/" + mediaElement.NaturalDuration.TimeSpan.ToString(@"mm\:ss");
         }
 
-        void timer_Tick(object sender, EventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
             TimeSpan ts = mediaElement.Position;
             slider.Value = ts.TotalMilliseconds;
@@ -135,7 +137,7 @@ namespace Player
         private void mediaEnded(object sender, RoutedEventArgs e)
         {
             nextToPlay(1);
-        } 
+        }
 
         private void nextToPlay(int direction)
         {
@@ -144,9 +146,97 @@ namespace Player
                 currentFileIndex = 0;
             if (currentFileIndex < 0)
                 currentFileIndex = filesList.Length - 1;
-            mediaElement.Source = new Uri(filesList[currentFileIndex], UriKind.Relative);
-            mediaElement.Play();
+            typeOfMedia(filesList[currentFileIndex], true);
         }
- 
+
+        private void typeOfMedia(String file, Boolean playNow)
+        {
+            if (file == null || file.Equals(""))
+                file = filesList[currentFileIndex];
+            var contentType = System.IO.Path.GetExtension(file);
+
+            if (Regex.Match(contentType, @"mp3").Success)  // musics
+            {
+                playerControlGrid.Visibility = Visibility.Visible;
+                photoControlGrid.Visibility = Visibility.Hidden;
+                photoElement.Visibility = Visibility.Visible;
+                slider.Visibility = Visibility.Visible;
+                timesLabel.Visibility = Visibility.Visible;
+                mediaElement.Visibility = Visibility.Hidden;
+                mediaElement.Source = new Uri(file, UriKind.Absolute);
+                findAudioCover(file);
+                if(playNow)
+                    mediaElement.Play();
+            }
+            else if (Regex.Match(contentType, @"(wmv)|(mp4)").Success)    // video
+            {
+                mediaElement.Visibility = Visibility.Visible;
+                playerControlGrid.Visibility = Visibility.Visible;
+                photoControlGrid.Visibility = Visibility.Hidden;
+                photoElement.Visibility = Visibility.Hidden;
+                slider.Visibility = Visibility.Visible;
+                timesLabel.Visibility = Visibility.Visible;
+                mediaElement.Source = new Uri(file, UriKind.Absolute);
+                if (playNow)
+                    mediaElement.Play();
+            }
+            else if (Regex.Match(contentType, @"(jpg)|(gif)|(png)").Success)   // pictures
+            {
+                mediaElement.Stop();
+                mediaElement.Close();
+                mediaElement.Visibility = Visibility.Hidden;
+                playerControlGrid.Visibility = Visibility.Hidden;
+                photoControlGrid.Visibility = Visibility.Visible;
+                slider.Visibility = Visibility.Hidden;
+                timesLabel.Visibility = Visibility.Hidden;
+                BitmapImage bi3 = new BitmapImage();
+                bi3.BeginInit();
+                bi3.UriSource = new Uri(file, UriKind.Absolute);
+                bi3.EndInit();
+                photoElement.Source = bi3;
+                photoElement.Visibility = Visibility.Visible;
+            }
+
+        }
+
+        private void findAudioCover(String file)
+        {
+            TagLib.File tagFile = TagLib.File.Create(filesList[currentFileIndex]);
+            string artist = tagFile.Tag.FirstAlbumArtist ?? tagFile.Tag.FirstArtist;
+            string album = tagFile.Tag.Album;
+            string title = tagFile.Tag.Title;
+
+            BitmapImage bi3 = new BitmapImage();
+            bi3.BeginInit();
+            for(int i = 0; i < coversList.Length; i++)
+            {
+                String cover = coversList[i];
+                if(cover.Contains(album))
+                {
+                    bi3.UriSource = new Uri(cover, UriKind.Absolute);
+                    break;
+                }
+            }
+
+            if(bi3.UriSource == null)
+            {
+                for (int i = 0; i < coversList.Length; i++)
+                {
+                    String cover = coversList[i];
+                    if (cover.Contains(artist))
+                    {
+                        bi3.UriSource = new Uri(cover, UriKind.Absolute);
+                        break;
+                    }
+                }
+            }
+
+            if (bi3.UriSource == null)
+                bi3.UriSource = new Uri(@"Resources/blank_cover.png", UriKind.Relative);
+
+            bi3.EndInit();
+            photoElement.Source = bi3;
+        }
+
     }
 }
