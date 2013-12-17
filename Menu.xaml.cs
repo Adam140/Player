@@ -40,7 +40,7 @@ namespace Player
                 case "buttonMultimedia":
                     ViewSwitcher.Switch(mainWindow.playerScreen = new player(""));
                     break;
-                case "buttonMusic":
+                case "buttonAudio":
                     ViewSwitcher.Switch(new Playlist(@"D:\Studia\player\Multimedia"));
                     break;
             }

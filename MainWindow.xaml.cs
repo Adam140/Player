@@ -37,8 +37,8 @@ namespace Player
         {
             InitializeComponent();
             ViewSwitcher.SetMainWindow(this);
-            //ViewSwitcher.Switch(mainMenu = new Menu(this));
-            ViewSwitcher.Switch(new Playlist(@"D:\Studia\player\Multimedia"));
+            ViewSwitcher.Switch(mainMenu = new Menu(this));
+           // ViewSwitcher.Switch(new Playlist(@"D:\Studia\player\Multimedia"));
             gestureGenerator = new GestureGenerator();
             // Listen to recognized gestures
             gestureGenerator.GestureRecognized += gestureGenerator_GestureRecognized;
