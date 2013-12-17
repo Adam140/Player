@@ -3,9 +3,64 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:k="http://schemas.microsoft.com/kinect/2013"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+             d:DesignHeight="300" d:DesignWidth="800">
+    <Grid >
+
+            <Grid.RowDefinitions>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="80*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30*" />
+            <ColumnDefinition Width="50*" />
+            <ColumnDefinition Width="20*" />
+        </Grid.ColumnDefinitions>
+        <!--<k:KinectRegion Grid.Row="0" Grid.Column="0" Name="kinectRegion"></k:KinectRegion>-->
+
+
+        <Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Name="Adam" VerticalAlignment="Center">
+            <StackPanel Width="auto" Height="auto">
+
+                <StackPanel Orientation="Horizontal" Width="auto" Height="auto">
+                    <Label Content="Title:"></Label>
+                    <Label Name="lbl_title" Content="ROCK"></Label>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Width="auto" Height="auto">
+                    <Label Content="Album:"></Label>
+                    <Label Name="lbl_album" Content="ROCK"></Label>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Type:"></Label>
+                    <Label Name="lbl_type" Content="ROCK"></Label>
+                </StackPanel>
+
+            </StackPanel>
+        </Grid>
+            <Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left"  VerticalAlignment="Center">
             
+            <Image x:Name="imgPreview" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="auto" Width="auto"/>
+            </Grid>
+            <Grid Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <k:KinectScrollViewer  HorizontalAlignment="Right" Margin="10,10,10,10" VerticalAlignment="Stretch" Height="auto" Width="auto">
+                <StackPanel Name="scrollList" Width="auto" Height="auto">
+                    
+                </StackPanel>
+            </k:KinectScrollViewer>
+        </Grid>
+        <Border BorderBrush="Black" BorderThickness="2" Grid.RowSpan="2" Grid.Column="2">
+            <Grid Grid.RowSpan="2" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" >
+                <k:KinectScrollViewer HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Stretch" Height="auto" Width="auto">
+                    <StackPanel Name="scrollChosenList" Width="auto" Height="auto">
+
+                    </StackPanel>
+                </k:KinectScrollViewer>
+            </Grid>
+        </Border>
+
     </Grid>
 </UserControl>
