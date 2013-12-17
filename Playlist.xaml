@@ -43,7 +43,7 @@
         </Grid>
             <Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left"  VerticalAlignment="Center">
             
-            <Image x:Name="imgPreview" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="auto" Width="auto"/>
+            <Image x:Name="imgPreview" Source="Multimedia/Covers/Dio - Holy Diver.jpg" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="auto" Width="auto"/>
             </Grid>
             <Grid Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" >
             <k:KinectScrollViewer  HorizontalAlignment="Right" Margin="10,10,10,10" VerticalAlignment="Stretch" Height="auto" Width="auto">
@@ -52,15 +52,15 @@
                 </StackPanel>
             </k:KinectScrollViewer>
         </Grid>
-        <Border BorderBrush="Black" BorderThickness="2" Grid.RowSpan="2" Grid.Column="2">
-            <Grid Grid.RowSpan="2" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" >
-                <k:KinectScrollViewer HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Stretch" Height="auto" Width="auto">
-                    <StackPanel Name="scrollChosenList" Width="auto" Height="auto">
+        <!--<Border BorderBrush="Black" BorderThickness="2" Grid.RowSpan="2" Grid.Column="2">-->
+            <Grid Grid.RowSpan="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+            <k:KinectScrollViewer Grid.RowSpan="2" Grid.Column="2" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" ContentMargin="0">
+                <StackPanel Name="scrollChosenList" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
                     </StackPanel>
                 </k:KinectScrollViewer>
             </Grid>
-        </Border>
+        <!--</Border>-->
 
     </Grid>
 </UserControl>

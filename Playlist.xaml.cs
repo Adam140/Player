@@ -23,6 +23,7 @@ namespace Player
     public partial class Playlist : UserControl, ISwitchable
     {
         String[] audioList;
+        String[] coverList;
 
         public Playlist()
         {
@@ -32,13 +33,14 @@ namespace Player
         {
             InitializeComponent();
             audioList = Directory.GetFiles(mainDir + "/Audio");
+            coverList = Directory.GetFiles(mainDir + "/Covers");
             //aint i = 0;
             updateAudioList();
             //TagLib.File tagFile = TagLib.File.Create(audioList[i]);
             //String artist = tagFile.Tag.FirstAlbumArtist;
             //String album = tagFile.Tag.Album;
             //String title = tagFile.Tag.Title;
-            //imgPreview.Source = new BitmapImage(new Uri(@"/Multimedia/Covers/Dio - Holy Diver.jpg", UriKind.Relative));
+            imgPreview.Source = new BitmapImage(new Uri(@"/Multimedia/Covers/ACDC - The Very Best.jpg", UriKind.Relative));
 
             
         }
@@ -47,32 +49,37 @@ namespace Player
         {
             for (int i = 0; i < audioList.Length; i++)
             {
-                var btn = new KinectCircleButton
-                {
-                    Name = "audio" + i.ToString(),
-                    Content = new Label { Content = audioList[i], FontSize=50 },
-                    Height = 200,
-                    //FontSize = 36
-                };
-                btn.Click += songClicked;
+                KinectTileButton btn = presentAudioFile(audioList[i]);
+                //KinectTileButton btn = new KinectTileButton{Name="audio" + i.ToString(), Cl}
+                btn.Name = "audio" + i.ToString();
+                //btn.Height = 200;
+                //{
+                //    Name = "audio" + i.ToString(),
+                //    Content = new Label { Content = audioList[i], FontSize=50 },
+                //    Height = 200,
+                //    //FontSize = 36
+                //};
+                //btn.Click
+                btn.Click += songClicked; 
                 btn.MouseEnter += songHover;
-                KinectRegion.AddHandPointerEnterHandler(btn, this.songClicked);
-                KinectRegion.AddHandPointerLeaveHandler(btn, this.songClicked);
+                //KinectRegion.AddHandPointerEnterHandler(btn, this.songClicked);
+                //KinectRegion.AddHandPointerLeaveHandler(btn, this.songClicked);
                 //kinectRegion.Ad
                 scrollList.Children.Add(btn);
+                //scrollList.Children.Add(presentAudioFile(audioList[i]));
             }
 
         }
 
         private void songHover(object sender, RoutedEventArgs args)
         {
-            string str = (sender as KinectCircleButton).Name.ToString();
+            string str = (sender as KinectTileButton).Name.ToString();
             this.updateInfo(str);
         }
 
         private void songClicked(object sender, RoutedEventArgs args)
         {
-            string str = (sender as KinectCircleButton).Name.ToString();
+            string str = (sender as KinectTileButton).Name.ToString();
             string tmp = str.Replace("audio","");
             int i = Convert.ToInt32(tmp);
                 var btn = new KinectCircleButton
@@ -82,7 +89,7 @@ namespace Player
                     Height = 200,
                     //FontSize = 36
                 };
-                scrollChosenList.Children.Add(btn);
+                scrollChosenList.Children.Add(presentAudioFile(i));
             this.updateInfo(str);
         }
 
@@ -103,11 +110,18 @@ namespace Player
             lbl_title.Content = tagFile.Tag.Title;
             lbl_type.Content = tagFile.Tag.FirstGenre;
             string artist = tagFile.Tag.FirstArtist;
-            imgPreview.Source = new BitmapImage(new Uri(@"/Multimedia/Covers/" + artist + " - " + album + ".jpg", UriKind.Relative));
+            //imgPreview.Source = new BitmapImage(new Uri(@getAudioCover(path), UriKind.Relative));
+            imgPreview.Source = getAudioCoverBitmap(path);
+
 
         }
 
-        public string presentAudioFile(string path)
+        public KinectTileButton presentAudioFile(int i)
+        {
+            return presentAudioFile(audioList[i]);
+        }
+
+        public KinectTileButton presentAudioFile(string path)
         {
             TagLib.File tagFile = TagLib.File.Create(path);
             string artist = tagFile.Tag.FirstArtist;
@@ -115,8 +129,56 @@ namespace Player
             string album = "zxc";
             string title = tagFile.Tag.Title;
             //string genre = tagFile.Tag.FirstGenre;
-            return artist + " - " + title + "(" + album + ")";
+            Grid grid = new Grid();
+
+            // Create column definitions.
+            ColumnDefinition columnDefinition1 = new ColumnDefinition();
+            ColumnDefinition columnDefinition2 = new ColumnDefinition();
+            columnDefinition1.Width = new GridLength(0.4, GridUnitType.Star);
+            columnDefinition2.Width = new GridLength(0.6, GridUnitType.Star);
+
+            // Create row definitions.
+            RowDefinition rowDefinition1 = new RowDefinition();
+            rowDefinition1.Height = new GridLength(1, GridUnitType.Star);
+
+            // Attached definitions to grid.
+            grid.ColumnDefinitions.Add(columnDefinition1);
+            grid.ColumnDefinitions.Add(columnDefinition2);
+            grid.RowDefinitions.Add(rowDefinition1);
+
+            Image img = new Image { Source = getAudioCoverBitmap(path) };
+            grid.Children.Add(img);
+            Grid.SetColumn(img, 0);
+            Grid.SetRow(img, 0);
+            StackPanel panel = new StackPanel();
+            panel.Children.Add(new Label{ Content = artist + " - " + title + "(" + album + ")" });
+            grid.Children.Add(panel);
+            Grid.SetColumn(panel, 1);
+            Grid.SetRow(panel, 0);
+            KinectTileButton kin = new KinectTileButton { Content = grid };
+            return kin;
+            //return artist + " - " + title + "(" + album + ")";
             
+        }
+
+        public string getAudioCover(string path)
+        {
+            TagLib.File tagFile = TagLib.File.Create(path);
+            //string artist = tagFile.Tag.FirstArtist;
+            string album = tagFile.Tag.Album;
+            string cover;
+            for (int i = 0; i < coverList.Length; i++)
+            {
+                if (coverList[i].Contains(album))
+                    return coverList[i];
+            }
+            return "";
+
+        }
+
+        public BitmapImage getAudioCoverBitmap(string path)
+        {
+            return new BitmapImage(new Uri(@getAudioCover(path), UriKind.RelativeOrAbsolute));
         }
 
 

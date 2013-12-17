@@ -22,7 +22,6 @@ namespace Player
     {
         ISwitchable currentView;
         String currentViewName;
-
         public Menu mainMenu;
         public player playerScreen;
 
@@ -30,8 +29,8 @@ namespace Player
         {
             InitializeComponent();
             ViewSwitcher.SetMainWindow(this);
-            ViewSwitcher.Switch(mainMenu = new Menu(this));
-
+            //ViewSwitcher.Switch(mainMenu = new Menu(this));
+            ViewSwitcher.Switch(new Playlist(@"D:\Studia\player\Multimedia"));
         }
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
