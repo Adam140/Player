@@ -13,6 +13,7 @@
             <RowDefinition Height="25*"/>
             <RowDefinition Height="25*"/>
         </Grid.RowDefinitions>
+
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <k:KinectTileButton Label="Multimedia"  Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonMultimedia" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,0,20,20" FontSize="12">
                 <k:KinectTileButton.Background>

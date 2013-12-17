@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Fizbin.Kinect.Gestures;
+using Microsoft.Kinect;
+using Microsoft.Kinect.Toolkit;
+using Microsoft.Kinect.Toolkit.Controls;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Player
 {
@@ -21,10 +15,12 @@ namespace Player
     public partial class Menu : UserControl, ISwitchable
     {
         MainWindow mainWindow;
+       
         public Menu(MainWindow main)
         {
             InitializeComponent();
             this.mainWindow = main;
+
         }
 
         public void UtilizeState(object state)
@@ -50,5 +46,7 @@ namespace Player
             }
 
         }
+
+      
     }
 }
