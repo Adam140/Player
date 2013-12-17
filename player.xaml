@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:k="http://schemas.microsoft.com/kinect/2013"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="800">
+             d:DesignHeight="300" d:DesignWidth="800" Name="PlayerScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="90*"/>
@@ -16,7 +16,7 @@
                     Buttons for controling video
      ***********************************************************
 -->
-        <Grid Grid.Row="1" Name="videoControlGrid">
+        <Grid Grid.Row="1" Name="playerControlGrid" Visibility="Hidden">
             <Grid.Background>
                 <SolidColorBrush Color="Black" Opacity="0.6"/>
             </Grid.Background>
@@ -63,17 +63,17 @@
      ***********************************************************
 -->
         </Grid>
-        <Grid Grid.Row="1" Name="photoControlGrid" Visibility="Hidden">
+        <Grid Grid.Row="1" Name="photoControlGrid" Visibility="Visible">
             <Grid.Background>
                 <SolidColorBrush Color="Black" Opacity="0.6"/>
             </Grid.Background>
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonNext" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,20,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
+                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonPrevious" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,20,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
                     <k:KinectCircleButton.Background>
                         <ImageBrush ImageSource="Resources/Player_icon/rewind.png" TileMode="FlipXY"/>
                     </k:KinectCircleButton.Background>
                 </k:KinectCircleButton>
-                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonPrevious" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,0,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
+                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonNext" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,0,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
                     <k:KinectCircleButton.Background>
                         <ImageBrush ImageSource="Resources/Player_icon/forward.png" TileMode="FlipXY"/>
                     </k:KinectCircleButton.Background>
@@ -84,74 +84,34 @@
         
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10*" />
-                <ColumnDefinition Width="80*" />
-                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="90*" />
+                <ColumnDefinition Width="5*" />
             </Grid.ColumnDefinitions>
-
-<!-- 
-     ***********************************************************
-                   Previous grid
-     ***********************************************************
--->
-            <Grid Grid.Column="0" Name="prevGrid" Margin="10,15">
-                <Grid.Background>
-                    <SolidColorBrush Color="Black" Opacity="0.3"/>
-                </Grid.Background>
-
-            </Grid>
 
 <!-- 
      ***********************************************************
                    Video/musics grid
      ***********************************************************
 -->
-                <Grid Name="videoGrid" Grid.Column="1" Background="Black" Margin="0,15">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="90*"/>
-                        <RowDefinition Height="10*"/>
-                    </Grid.RowDefinitions>
+            <Grid Name="videoGrid" Grid.Column="1" Background="Black" Margin="0,15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="90*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="85*"/>
                     <ColumnDefinition Width="15*"/>
                 </Grid.ColumnDefinitions>
-                <Image Grid.Row="0" Grid.ColumnSpan="2"/>
+                <Image Name="photoElement" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,20,0,0"/>
                 <MediaElement  Grid.Row="0" Grid.ColumnSpan="2" Name="mediaElement" Width="Auto" LoadedBehavior="Manual" UseLayoutRounding="True" 
-                                   Volume="1" UnloadedBehavior="Stop" Height="Auto" MediaOpened="mediaOpened" MediaEnded="mediaEnded" Visibility="Hidden"/>
-                 <Slider ValueChanged="SeekToMediaPosition" Name="slider" IsMoveToPointEnabled="True" HorizontalContentAlignment="Stretch" Grid.Row="1" Grid.Column="0" VerticalContentAlignment="Center" Margin="20,0,10,0" VerticalAlignment="Center" Visibility="Hidden"/>
-                <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,0,10,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                                   Volume="1" UnloadedBehavior="Stop" Height="Auto" MediaOpened="mediaOpened" MediaEnded="mediaEnded" ScrubbingEnabled="True" Visibility="Hidden"/>
+                <Slider ValueChanged="SeekToMediaPosition" Name="slider" IsMoveToPointEnabled="True" HorizontalContentAlignment="Stretch" Grid.Row="1" Grid.Column="0" VerticalContentAlignment="Center" Margin="20,0,10,0" VerticalAlignment="Center" Visibility="Hidden"/>
+                <StackPanel Name="timesLabel" Grid.Row="1" Grid.Column="1" Margin="0,0,10,0" Orientation="Horizontal" HorizontalAlignment="Center">
                     <Label Name="passedTime" Padding="0,5" Foreground="White" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
                     <Label Name="totalTime" Padding="0,5" Foreground="White" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
-                    
+
                 </StackPanel>
-                
-
-            </Grid>
-<!-- 
-     ***********************************************************
-                   Photo grid
-     ***********************************************************
--->
-
-            <Grid Name="photoGrid" Grid.Column="1" Background="Black" Margin="0,15" Visibility="Hidden">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30*"/>
-                    <RowDefinition Height="70*"/>
-                </Grid.RowDefinitions>
-            </Grid>
-                
- 
-
-<!-- 
-     ***********************************************************
-                   Next grid 
-     ***********************************************************
--->
-            <Grid Grid.Column="2" Name="nextGrid" Margin="10,15">
-                <Grid.Background>
-                    <SolidColorBrush Color="Black" Opacity="0.3"/>
-                </Grid.Background>
-                <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Click="Button_Click" />
             </Grid>
         </Grid>
     </Grid>
