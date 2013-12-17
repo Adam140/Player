@@ -38,6 +38,8 @@ namespace Player
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(400);
             timer.Tick += new EventHandler(timer_Tick);
+            photoElement.Width = 100;
+            photoElement.Height = 100;
 
         }
 
@@ -142,7 +144,7 @@ namespace Player
             nextToPlay(1);
         }
 
-        private void nextToPlay(int direction)
+        public void nextToPlay(int direction)
         {
             currentFileIndex += direction;
             if (currentFileIndex >= filesList.Length)
@@ -239,6 +241,14 @@ namespace Player
 
             bi3.EndInit();
             photoElement.Source = bi3;
+        }
+
+        public static void Scale(Image img, int maxWidth, int maxHeight)
+        {
+            var st = (ScaleTransform)img.RenderTransform;
+            double zoom = .2;
+            st.ScaleX += zoom;
+            st.ScaleY += zoom;
         }
 
     }

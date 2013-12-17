@@ -103,7 +103,9 @@
                     <ColumnDefinition Width="85*"/>
                     <ColumnDefinition Width="15*"/>
                 </Grid.ColumnDefinitions>
-                <Image Name="photoElement" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,20,0,0"/>
+                <k:KinectScrollViewer Name="scrollPhoto" Grid.Row="0" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ContentMargin="50" ClipToBounds="True" Margin="50,50,50,1">
+                    <Image Name="photoElement"/>
+                </k:KinectScrollViewer>
                 <MediaElement  Grid.Row="0" Grid.ColumnSpan="2" Name="mediaElement" Width="Auto" LoadedBehavior="Manual" UseLayoutRounding="True" 
                                    Volume="1" UnloadedBehavior="Stop" Height="Auto" MediaOpened="mediaOpened" MediaEnded="mediaEnded" ScrubbingEnabled="True" Visibility="Hidden"/>
                 <Slider ValueChanged="SeekToMediaPosition" Name="slider" IsMoveToPointEnabled="True" HorizontalContentAlignment="Stretch" Grid.Row="1" Grid.Column="0" VerticalContentAlignment="Center" Margin="20,0,10,0" VerticalAlignment="Center" Visibility="Hidden"/>
