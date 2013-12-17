@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Kinect.Toolkit;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,11 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Kinect;
+using Microsoft.Kinect.Toolkit;
+using Microsoft.Kinect.Toolkit.Controls;
+using Fizbin.Kinect.Gestures;
 
 namespace Player
 {
@@ -23,6 +27,9 @@ namespace Player
         ISwitchable currentView;
         String currentViewName;
 
+        private readonly KinectSensorChooser sensorChooser;
+        private GestureGenerator gestureGenerator;
+
         public Menu mainMenu;
         public player playerScreen;
 
@@ -31,6 +38,20 @@ namespace Player
             InitializeComponent();
             ViewSwitcher.SetMainWindow(this);
             ViewSwitcher.Switch(mainMenu = new Menu(this));
+
+            gestureGenerator = new GestureGenerator();
+            // Listen to recognized gestures
+            gestureGenerator.GestureRecognized += gestureGenerator_GestureRecognized;
+
+            this.sensorChooser = new KinectSensorChooser();
+            //this.sensorChooser.KinectChanged += SensorChooserOnKinectChanged;
+            this.sensorChooser.KinectChanged += SensorChooserOnKinectChanged;
+            this.sensorChooserUi.KinectSensorChooser = this.sensorChooser;
+            this.sensorChooser.Start();
+
+            var regionSensorBinding = new Binding("Kinect") { Source = this.sensorChooser };
+            BindingOperations.SetBinding(this.kinectRegion, KinectRegion.KinectSensorProperty, regionSensorBinding);
+          
 
         }
 
@@ -116,6 +137,93 @@ namespace Player
             if(playerScreen != null)
             {
                 playerScreen.mediaElement.Volume = sliderVolumn.Value / 10.0;
+            }
+        }
+
+        /// <summary>
+        /// Called when the KinectSensorChooser gets a new sensor
+        /// </summary>
+        /// <param name="sender">sender of the event</param>
+        /// <param name="args">event arguments</param>
+        private void SensorChooserOnKinectChanged(object sender, KinectChangedEventArgs args)
+        {
+            // Initialize Gesture Generator
+            gestureGenerator.Initialize(args.OldSensor, args.NewSensor);
+
+            // Handle old and new sensor normally..
+            if (args.OldSensor != null)
+            {
+                try
+                {
+                    args.OldSensor.DepthStream.Range = DepthRange.Default;
+                    args.OldSensor.SkeletonStream.EnableTrackingInNearRange = false;
+                    args.OldSensor.DepthStream.Disable();
+                    args.OldSensor.SkeletonStream.Disable();
+                }
+                catch (InvalidOperationException)
+                {
+                    // KinectSensor might enter an invalid state while enabling/disabling streams or stream features.
+                    // E.g.: sensor might be abruptly unplugged.
+                }
+            }
+
+            if (args.NewSensor != null)
+            {
+                try
+                {
+                    gestureGenerator.Initialize(args.OldSensor, args.NewSensor);
+
+                    args.NewSensor.DepthStream.Enable(DepthImageFormat.Resolution640x480Fps30);
+                    args.NewSensor.SkeletonStream.Enable();
+
+                    try
+                    {
+                        args.NewSensor.DepthStream.Range = DepthRange.Default;
+                        args.NewSensor.SkeletonStream.EnableTrackingInNearRange = true;
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        // Non Kinect for Windows devices do not support Near mode, so reset back to default mode.
+                        args.NewSensor.DepthStream.Range = DepthRange.Default;
+                        args.NewSensor.SkeletonStream.EnableTrackingInNearRange = false;
+                    }
+                }
+                catch (InvalidOperationException)
+                {
+                    // KinectSensor might enter an invalid state while enabling/disabling streams or stream features.
+                    // E.g.: sensor might be abruptly unplugged.
+                }
+            }
+        }
+
+        void gestureGenerator_GestureRecognized(GestureType gestureType, int trackingId)
+        {
+            switch (gestureType)
+            {
+                case GestureType.SwipeLeft:
+                    if(helpContent.Visibility == Visibility.Visible)
+                        helpContent.Visibility = Visibility.Hidden;
+                    else if(buttonBack.Visibility == Visibility.Visible)
+                        ViewSwitcher.Switch(mainMenu);
+                    break;
+                case GestureType.WaveLeft:
+                    if(playerScreen.mediaElement.IsLoaded && playerScreen.playerControlGrid.Visibility == Visibility.Visible)
+                    {
+                    playerScreen.buttonRewind.RaiseEvent((new RoutedEventArgs(Button.ClickEvent)));
+                    }
+                    break;
+                case GestureType.WaveRight:
+                    if (playerScreen.mediaElement.IsLoaded && playerScreen.playerControlGrid.Visibility == Visibility.Visible)
+                    {
+                        playerScreen.buttonForward.RaiseEvent((new RoutedEventArgs(Button.ClickEvent)));
+                    }
+                    break;
+
+                case GestureType.ZoomIn:
+                    break;
+
+                default:
+                    break;
             }
         }
      

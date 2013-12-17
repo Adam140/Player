@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Kinect.Toolkit;
+using Microsoft.Kinect.Toolkit.Controls;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -36,6 +38,7 @@ namespace Player
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(400);
             timer.Tick += new EventHandler(timer_Tick);
+
         }
 
         public player(String mainDir)
