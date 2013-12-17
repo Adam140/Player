@@ -26,7 +26,7 @@ namespace Player
     /// </summary>
     public partial class player : UserControl, ISwitchable
     {
-        const String dir = @"C:\Users\Adam\Documents\GitHub\Player\Multimedia";    // folder where all multimedia files are stored
+        const String dir = @"D:\Studia\player\Multimedia";    // folder where all multimedia files are stored
         String[] filesList;
         String[] coversList;
         int currentFileIndex = 0;
@@ -48,7 +48,7 @@ namespace Player
                 mainDir = dir;
             filesList = Directory.GetFiles(mainDir);
 
-            coversList = Directory.GetFiles(mainDir, "cover_*");
+            coversList = Directory.GetFiles(mainDir + "/covers", "*");
             filesList = (from file in filesList let name = System.IO.Path.GetFileNameWithoutExtension(file) where !name.StartsWith("cover_") select file).ToArray();
             typeOfMedia(filesList[0], false);
         }
@@ -57,6 +57,8 @@ namespace Player
             : this()
         {
             this.filesList = filesList;
+            coversList = Directory.GetFiles(dir+"/covers", "*");
+            filesList = (from file in filesList let name = System.IO.Path.GetFileNameWithoutExtension(file) where !name.StartsWith("cover_") select file).ToArray();
             typeOfMedia(filesList[0], false);
         }
 

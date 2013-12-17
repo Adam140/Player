@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Kinect.Toolkit;
 using Microsoft.Kinect.Toolkit.Controls;
+using System.Collections;
 namespace Player
 {
     /// <summary>
@@ -24,6 +25,7 @@ namespace Player
     {
         String[] audioList;
         String[] coverList;
+        ArrayList chosenList = new ArrayList();
 
         public Playlist()
         {
@@ -62,7 +64,9 @@ namespace Player
                 //btn.Click
                 btn.Click += songClicked; 
                 btn.MouseEnter += songHover;
-                //KinectRegion.AddHandPointerEnterHandler(btn, this.songClicked);
+                //btn.GotFocus += songHover;
+                //btn.TouchEnter += songHover;
+                KinectRegion.AddHandPointerEnterHandler(btn, this.songHover);
                 //KinectRegion.AddHandPointerLeaveHandler(btn, this.songClicked);
                 //kinectRegion.Ad
                 scrollList.Children.Add(btn);
@@ -81,7 +85,9 @@ namespace Player
         {
             string str = (sender as KinectTileButton).Name.ToString();
             string tmp = str.Replace("audio","");
+            
             int i = Convert.ToInt32(tmp);
+            chosenList.Add(audioList[i]);
                 var btn = new KinectCircleButton
                 {
                     Name = "chosen" + str,
@@ -150,12 +156,24 @@ namespace Player
             grid.Children.Add(img);
             Grid.SetColumn(img, 0);
             Grid.SetRow(img, 0);
+            grid.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+            grid.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+
             StackPanel panel = new StackPanel();
-            panel.Children.Add(new Label{ Content = artist + " - " + title + "(" + album + ")" });
+            panel.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+            panel.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+            panel.Children.Add(new Label{ Content = artist });
+            panel.Children.Add(new Label { Content = title });
+            panel.Children.Add(new Label { Content = album });
+            //panel.Background = Brushes.Blue;
             grid.Children.Add(panel);
             Grid.SetColumn(panel, 1);
             Grid.SetRow(panel, 0);
+            //grid.Background = Brushes.Bisque;
             KinectTileButton kin = new KinectTileButton { Content = grid };
+            kin.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+            kin.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+            kin.Width = panel.Width;
             return kin;
             //return artist + " - " + title + "(" + album + ")";
             
@@ -181,6 +199,11 @@ namespace Player
             return new BitmapImage(new Uri(@getAudioCover(path), UriKind.RelativeOrAbsolute));
         }
 
+        public String[] getChosenSongs()
+        {
+            return (string[])chosenList.ToArray(typeof(string));
+        }
+
 
         public void Destroy()
         {
@@ -189,6 +212,16 @@ namespace Player
 
         public void UtilizeState(object mainDir)
         {
+
+        }
+
+        private void KinectCircleButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            songInformationGrid.Visibility = System.Windows.Visibility.Collapsed;
+            songCover.Visibility = System.Windows.Visibility.Collapsed;
+            allSongsGrid.Visibility = System.Windows.Visibility.Collapsed;
+            playerContainer.Children.Add(new player(getChosenSongs()));
+            playerContainer.Visibility = System.Windows.Visibility.Visible;
 
         }
     }

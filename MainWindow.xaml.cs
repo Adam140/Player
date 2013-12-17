@@ -37,8 +37,8 @@ namespace Player
         {
             InitializeComponent();
             ViewSwitcher.SetMainWindow(this);
-            ViewSwitcher.Switch(mainMenu = new Menu(this));
-
+            //ViewSwitcher.Switch(mainMenu = new Menu(this));
+            ViewSwitcher.Switch(new Playlist(@"D:\Studia\player\Multimedia"));
             gestureGenerator = new GestureGenerator();
             // Listen to recognized gestures
             gestureGenerator.GestureRecognized += gestureGenerator_GestureRecognized;
@@ -207,16 +207,16 @@ namespace Player
                         ViewSwitcher.Switch(mainMenu);
                     break;
                 case GestureType.WaveLeft:
-                    if(playerScreen.mediaElement.IsLoaded && playerScreen.playerControlGrid.Visibility == Visibility.Visible)
-                    {
-                    playerScreen.buttonRewind.RaiseEvent((new RoutedEventArgs(Button.ClickEvent)));
-                    }
+                    //if(playerScreen.mediaElement.IsLoaded && playerScreen.playerControlGrid.Visibility == Visibility.Visible)
+                    //{
+                    //playerScreen.buttonRewind.RaiseEvent((new RoutedEventArgs(Button.ClickEvent)));
+                    //}
                     break;
                 case GestureType.WaveRight:
-                    if (playerScreen.mediaElement.IsLoaded && playerScreen.playerControlGrid.Visibility == Visibility.Visible)
-                    {
-                        playerScreen.buttonForward.RaiseEvent((new RoutedEventArgs(Button.ClickEvent)));
-                    }
+                    //if (playerScreen.mediaElement.IsLoaded && playerScreen.playerControlGrid.Visibility == Visibility.Visible)
+                    //{
+                    //    playerScreen.buttonForward.RaiseEvent((new RoutedEventArgs(Button.ClickEvent)));
+                    //}
                     break;
 
                 case GestureType.ZoomIn:
