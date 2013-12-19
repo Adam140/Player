@@ -59,6 +59,7 @@ namespace Player
 
         public void updateAudioList()
         {
+            centerLabel.Content = "Avaliable Songs";
             this.clearScrollList();
             for (int i = 0; i < audioList.Length; i++)
             {
@@ -89,6 +90,7 @@ namespace Player
 
         public void updateAudioListTop10()
         {
+            centerLabel.Content = "TOP Songs";
             this.clearScrollList();
             string[] tmp = this.getTop10();
             for (int i = 0; i < tmp.Length; i++)

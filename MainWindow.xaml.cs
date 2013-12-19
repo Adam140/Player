@@ -33,6 +33,7 @@ namespace Player
         public player playerScreen;
         public Playlist playlist;
         public static string[] chosenSongs;
+        public static string mainDir = @"D:\Studia\player\Multimedia";
 
         public MainWindow()
         {
