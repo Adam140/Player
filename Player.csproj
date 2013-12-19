@@ -80,6 +80,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AudioFile.cs" />
     <Compile Include="Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
@@ -209,6 +210,7 @@
     <Content Include="Multimedia\Audio\16 - For those about to rock we salute you.mp3" />
     <Content Include="Multimedia\Audio\17 - Big balls.mp3" />
     <Content Include="Multimedia\Audio\18 - Rocker.mp3" />
+    <Resource Include="Resources\Menu_icon\top.png" />
     <Resource Include="Multimedia\Covers\ACDC - The Very Best.jpg" />
     <Resource Include="Multimedia\Covers\Dio - Holy Diver.jpg" />
     <Resource Include="Multimedia\Covers\zxc.jpg" />

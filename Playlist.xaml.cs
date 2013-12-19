@@ -27,6 +27,8 @@ namespace Player
         String[] coverList;
         ArrayList chosenList = new ArrayList();
         KinectTileButton activeElement = null;
+        List<AudioFile> audioFiles = new List<AudioFile>();
+
 
         public Playlist()
         {
@@ -55,10 +57,12 @@ namespace Player
             
         }
 
-        private void updateAudioList()
+        public void updateAudioList()
         {
+            this.clearScrollList();
             for (int i = 0; i < audioList.Length; i++)
             {
+                audioFiles.Add(new AudioFile(i, audioList[i], 0));
                 KinectTileButton btn = presentAudioFile(audioList[i]);
                 //KinectTileButton btn = new KinectTileButton{Name="audio" + i.ToString(), Cl}
                 btn.Name = "audio" + i.ToString();
@@ -80,6 +84,43 @@ namespace Player
                 scrollList.Children.Add(btn);
                 //scrollList.Children.Add(presentAudioFile(audioList[i]));
             }
+
+        }
+
+        public void updateAudioListTop10()
+        {
+            this.clearScrollList();
+            string[] tmp = this.getTop10();
+            for (int i = 0; i < tmp.Length; i++)
+            {
+                //audioFiles.Add(new AudioFile(i, audioList[i], 0));
+                KinectTileButton btn = presentAudioFile(tmp[i]);
+                //KinectTileButton btn = new KinectTileButton{Name="audio" + i.ToString(), Cl}
+                btn.Name = "audio" + i.ToString();
+                //btn.Height = 200;
+                //{
+                //    Name = "audio" + i.ToString(),
+                //    Content = new Label { Content = audioList[i], FontSize=50 },
+                //    Height = 200,
+                //    //FontSize = 36
+                //};
+                //btn.Click
+                btn.Click += songClicked;
+                btn.MouseEnter += songHover;
+                //btn.GotFocus += songHover;
+                //btn.TouchEnter += songHover;
+                KinectRegion.AddHandPointerEnterHandler(btn, this.songHover);
+                //KinectRegion.AddHandPointerLeaveHandler(btn, this.songClicked);
+                //kinectRegion.Ad
+                scrollList.Children.Add(btn);
+                //scrollList.Children.Add(presentAudioFile(audioList[i]));
+            }
+        }
+
+
+        private void clearScrollList()
+        {
+            scrollList.Children.Clear();
 
         }
 
@@ -116,8 +157,12 @@ namespace Player
             btn.MouseEnter += songHover;
             btn.Name = (sender as KinectTileButton).Name.ToString();
             KinectRegion.AddHandPointerEnterHandler(btn, this.songHover);
+
+            AudioFile a = audioFiles.Find(j => j.id == i);
+            a.clicked++;
    
             scrollChosenList.Children.Add(btn);
+            MainWindow.chosenSongs = this.getChosenSongs();
             this.updateInfo(str);
         }
 
@@ -129,6 +174,8 @@ namespace Player
             
             int i = Convert.ToInt32(tmp);
             chosenList.Remove(audioList[i]);
+            MainWindow.chosenSongs = this.getChosenSongs();
+
         }
 
         private void activeSong(object sender, RoutedEventArgs args)
@@ -278,7 +325,22 @@ namespace Player
             {
                 (child as KinectTileButton).Click -= removeSong;
                 (child as KinectTileButton).Click += activeSong;
-            }       
+            }
+        }
+
+        public void setPlaylistVisible()
+        {
+            songInformationGrid.Visibility = System.Windows.Visibility.Visible;
+            songCover.Visibility = System.Windows.Visibility.Visible;
+            allSongsGrid.Visibility = System.Windows.Visibility.Visible;
+            playerContainer.Children.Add(new player(getChosenSongs()));
+            playerContainer.Visibility = System.Windows.Visibility.Collapsed;
+            playlistPlay.Visibility = System.Windows.Visibility.Visible;
+            foreach (object child in scrollChosenList.Children)
+            {
+                (child as KinectTileButton).Click += removeSong;
+                (child as KinectTileButton).Click -= activeSong;
+            }
         }
 
         public void setActiveSong(int index)
@@ -296,6 +358,17 @@ namespace Player
                 this.activeElement.Background = null;
             this.activeElement = btn;
 
+        }
+
+        public string[] getTop10()
+        {
+            string[] sorted = new string[audioFiles.Count];
+            audioFiles = audioFiles.OrderByDescending(o => o.clicked).ToList();
+            for (int i = 0; i < audioFiles.Count; i++)
+            {
+                sorted[i] = audioFiles.ElementAt(i).path;
+            }
+            return sorted;
         }
     }
 }

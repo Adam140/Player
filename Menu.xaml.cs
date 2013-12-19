@@ -41,7 +41,25 @@ namespace Player
                     ViewSwitcher.Switch(mainWindow.playerScreen = new player(""));
                     break;
                 case "buttonAudio":
-                    ViewSwitcher.Switch(new Playlist(@"D:\Studia\player\Multimedia"));
+                    if (mainWindow.playlist != null)
+                    {
+                        mainWindow.playlist.setPlaylistVisible();
+                        mainWindow.playlist.updateAudioList();
+                        ViewSwitcher.Switch(mainWindow.playlist);
+                    }
+                    else
+                        ViewSwitcher.Switch(mainWindow.playlist = new Playlist(@"D:\Studia\player\Multimedia"));
+                    break;
+
+                case "buttonPictures":
+                    if (mainWindow.playlist != null)
+                    {
+                        mainWindow.playlist.setPlaylistVisible();
+                        mainWindow.playlist.updateAudioListTop10();
+                        ViewSwitcher.Switch(mainWindow.playlist);
+                    }
+                    else
+                        ViewSwitcher.Switch(mainWindow.playlist = new Playlist(@"D:\Studia\player\Multimedia"));
                     break;
             }
 

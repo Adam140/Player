@@ -32,6 +32,8 @@ namespace Player
 
         public Menu mainMenu;
         public player playerScreen;
+        public Playlist playlist;
+        public static string[] chosenSongs;
 
         public MainWindow()
         {

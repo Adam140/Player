@@ -34,7 +34,7 @@
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <k:KinectTileButton Label="Images" Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonPictures" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,0,20,20" FontSize="12">
                 <k:KinectTileButton.Background>
-                    <ImageBrush ImageSource="Resources/Menu_icon/images.png" TileMode="FlipXY"/>
+                    <ImageBrush ImageSource="Resources/Menu_icon/top.png" TileMode="FlipXY"/>
                 </k:KinectTileButton.Background>
             </k:KinectTileButton>
             <k:KinectTileButton Label="Traffic map" Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonTraffic" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,0,20,20" FontSize="12">
