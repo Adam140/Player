@@ -323,12 +323,21 @@ namespace Player
             playerContainer.Children.Add(new player(getChosenSongs()));
             playerContainer.Visibility = System.Windows.Visibility.Visible;
             playlistPlay.Visibility = System.Windows.Visibility.Hidden;
+            backToPlaylist.Visibility = System.Windows.Visibility.Visible;
             foreach(object child in scrollChosenList.Children)
             {
                 (child as KinectTileButton).Click -= removeSong;
                 (child as KinectTileButton).Click += activeSong;
             }
         }
+
+        private void KinectTileButton_Click_2(object sender, RoutedEventArgs e)
+        {
+            this.setPlaylistVisible();
+            this.updateAudioList();
+            ViewSwitcher.Switch(this);
+        }
+
 
         public void setPlaylistVisible()
         {
@@ -338,6 +347,7 @@ namespace Player
             playerContainer.Children.Add(new player(getChosenSongs()));
             playerContainer.Visibility = System.Windows.Visibility.Collapsed;
             playlistPlay.Visibility = System.Windows.Visibility.Visible;
+            backToPlaylist.Visibility = System.Windows.Visibility.Collapsed;
             foreach (object child in scrollChosenList.Children)
             {
                 (child as KinectTileButton).Click += removeSong;

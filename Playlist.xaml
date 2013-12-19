@@ -48,7 +48,7 @@
             <Image x:Name="imgPreview" Source="Multimedia/Covers/Dio - Holy Diver.jpg" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="auto" Width="auto"/>
             </Grid>
         <Grid Name="allSongsGrid" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-            <Label HorizontalAlignment="Center"  FontSize="30" Content="Avaliable songs"></Label>
+            <Label Name="centerLabel" HorizontalAlignment="Center"  FontSize="30" Content="Avaliable songs"></Label>
                 <k:KinectScrollViewer Margin="0,50,0,0" VerticalAlignment="Stretch" Height="auto" Width="auto" ContentMargin="0" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
                 <StackPanel Name="scrollList" Width="auto" Height="auto">
                     
@@ -62,6 +62,11 @@
                 <k:KinectTileButton Name="playlistPlay" Label=""  Height="auto" Width="auto" FontSize="12" Click="KinectTileButton_Click_1">
                     <k:KinectTileButton.Background>
                         <ImageBrush ImageSource="Resources/play_icon.png" TileMode="FlipXY"/>
+                    </k:KinectTileButton.Background>
+                </k:KinectTileButton>
+                <k:KinectTileButton Name="backToPlaylist" Label="" Visibility="Collapsed" Height="auto" Width="auto" FontSize="12" Click="KinectTileButton_Click_2">
+                    <k:KinectTileButton.Background>
+                        <ImageBrush ImageSource="Resources/back.png" TileMode="FlipXY"/>
                     </k:KinectTileButton.Background>
                 </k:KinectTileButton>
             </StackPanel>
