@@ -33,8 +33,8 @@ namespace Player
         public player playerScreen;
         public Playlist playlist;
         public static string[] chosenSongs;
-        //public static string mainDir = @"D:\Studia\player\";
-        public static string mainDir = @"C:\Users\Adam\Documents\GitHub\Player";
+        public static string mainDir = @"D:\Studia\player\";
+        //public static string mainDir = @"C:\Users\Adam\Documents\GitHub\Player";
 
         public MainWindow()
         {

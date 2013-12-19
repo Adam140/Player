@@ -41,6 +41,11 @@ namespace Player
             coverList = Directory.GetFiles(mainDir + "/Covers");
             //aint i = 0;
             updateAudioList();
+            for (int i = 0; i < audioList.Length; i++)
+            {
+
+                audioFiles.Add(new AudioFile(i, audioList[i], 0));
+            }
             //TagLib.File tagFile = TagLib.File.Create(audioList[i]);
             //String artist = tagFile.Tag.FirstAlbumArtist;
             //String album = tagFile.Tag.Album;
@@ -61,9 +66,15 @@ namespace Player
         {
             centerLabel.Content = "Avaliable Songs";
             this.clearScrollList();
+            bool add_new = true;
+            //if (audioList.Length != 0)
+            //{
+            //    add_new = false;
+            //}
             for (int i = 0; i < audioList.Length; i++)
             {
-                audioFiles.Add(new AudioFile(i, audioList[i], 0));
+                //if(add_new)
+                //    audioFiles.Add(new AudioFile(i, audioList[i], 0));
                 KinectTileButton btn = presentAudioFile(audioList[i]);
                 //KinectTileButton btn = new KinectTileButton{Name="audio" + i.ToString(), Cl}
                 btn.Name = "audio" + i.ToString();
