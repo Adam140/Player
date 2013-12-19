@@ -26,6 +26,7 @@ namespace Player
         String[] audioList;
         String[] coverList;
         ArrayList chosenList = new ArrayList();
+        KinectTileButton activeElement = null;
 
         public Playlist()
         {
@@ -43,7 +44,14 @@ namespace Player
             //String album = tagFile.Tag.Album;
             //String title = tagFile.Tag.Title;
             imgPreview.Source = new BitmapImage(new Uri(@"/Multimedia/Covers/ACDC - The Very Best.jpg", UriKind.Relative));
+            
+        }
 
+        public Playlist(string mainDir, String[] chosenList) : this(mainDir)
+        {
+            this.chosenList = new ArrayList(chosenList.Length);
+            this.chosenList.AddRange(chosenList);
+            updateChosenList();
             
         }
 
@@ -73,6 +81,21 @@ namespace Player
                 //scrollList.Children.Add(presentAudioFile(audioList[i]));
             }
 
+        }
+
+        private void updateChosenList()
+        {
+            for (int i = 0; i < chosenList.Count; i++)
+            {
+                KinectTileButton btn = presentAudioFile(chosenList[i].ToString());
+                btn.Name = "audio" + i.ToString();
+                btn.Click += removeSong;
+                btn.MouseEnter += songHover;
+                KinectRegion.AddHandPointerEnterHandler(btn, this.songHover);
+                scrollChosenList.Children.Add(btn);
+                this.updateInfo(btn.Name);
+
+            }
         }
 
         private void songHover(object sender, RoutedEventArgs args)
@@ -106,6 +129,11 @@ namespace Player
             
             int i = Convert.ToInt32(tmp);
             chosenList.Remove(audioList[i]);
+        }
+
+        private void activeSong(object sender, RoutedEventArgs args)
+        {
+            setActiveSong(sender as KinectTileButton);
         }
 
         public void test()
@@ -249,10 +277,24 @@ namespace Player
             foreach(object child in scrollChosenList.Children)
             {
                 (child as KinectTileButton).Click -= removeSong;
-
+                (child as KinectTileButton).Click += activeSong;
             }       
+        }
 
+        public void setActiveSong(int index)
+        {
+            UIElement tmp = scrollChosenList.Children[index];
+            KinectTileButton btn = (tmp as KinectTileButton);
+            setActiveSong(btn);
+            
+        }
 
+        public void setActiveSong(KinectTileButton btn)
+        {
+            btn.Background = Brushes.Coral;
+            if (this.activeElement != null)
+                this.activeElement.Background = null;
+            this.activeElement = btn;
 
         }
     }
