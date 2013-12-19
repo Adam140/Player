@@ -179,6 +179,7 @@ namespace Player
             scrollChosenList.Children.Add(btn);
             MainWindow.chosenSongs = this.getChosenSongs();
             this.updateInfo(str);
+
         }
 
         private void removeSong(object sender, RoutedEventArgs args)
