@@ -371,7 +371,7 @@ namespace Player
             allSongsGrid.Visibility = System.Windows.Visibility.Collapsed;
             playerContainer.Children.Add(new player(getChosenSongs()));
             playerContainer.Visibility = System.Windows.Visibility.Visible;
-            playlistPlay.Visibility = System.Windows.Visibility.Hidden;
+            playlistPlay.Visibility = System.Windows.Visibility.Collapsed;
             backToPlaylist.Visibility = System.Windows.Visibility.Visible;
         }
 
