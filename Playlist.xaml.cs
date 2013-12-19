@@ -91,6 +91,7 @@ namespace Player
         public void updateAudioListTop10()
         {
             centerLabel.Content = "TOP Songs";
+            updateChosenList();
             this.clearScrollList();
             string[] tmp = this.getTop10();
             for (int i = 0; i < tmp.Length; i++)
@@ -128,6 +129,7 @@ namespace Player
 
         private void updateChosenList()
         {
+            scrollChosenList.Children.Clear();
             for (int i = 0; i < chosenList.Count; i++)
             {
                 KinectTileButton btn = presentAudioFile(chosenList[i].ToString());
@@ -136,7 +138,7 @@ namespace Player
                 btn.MouseEnter += songHover;
                 KinectRegion.AddHandPointerEnterHandler(btn, this.songHover);
                 scrollChosenList.Children.Add(btn);
-                this.updateInfo(btn.Name);
+                //this.updateInfo(btn.Name);
 
             }
         }
@@ -317,11 +319,14 @@ namespace Player
 
         private void KinectTileButton_Click_1(object sender, RoutedEventArgs e)
         {
-            this.setPlayerVisible();
-            foreach(object child in scrollChosenList.Children)
+            if (this.chosenList.Count > 0)
             {
-                (child as KinectTileButton).Click -= removeSong;
-                (child as KinectTileButton).Click += activeSong;
+                this.setPlayerVisible();
+                foreach (object child in scrollChosenList.Children)
+                {
+                    (child as KinectTileButton).Click -= removeSong;
+                    (child as KinectTileButton).Click += activeSong;
+                }
             }
         }
 
