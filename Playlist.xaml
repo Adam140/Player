@@ -27,18 +27,18 @@
             <StackPanel Width="auto" Height="auto">
 
                 <StackPanel Orientation="Horizontal" Width="auto" Height="auto">
-                    <Label FontSize="30"  Content="Title:"></Label>
-                    <Label FontSize="30" Name="lbl_title" Content="ROCK"></Label>
+                    <Label FontSize="26"  Content="Title:"></Label>
+                    <Label FontSize="26" Name="lbl_title" Content="ROCK"></Label>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Width="auto" Height="auto">
-                    <Label FontSize="30" Content="Album:"></Label>
-                    <Label FontSize="30" Name="lbl_album" Content="ROCK"></Label>
+                    <Label FontSize="26" Content="Album:"></Label>
+                    <Label FontSize="26" Name="lbl_album" Content="ROCK"></Label>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label FontSize="30" Content="Type:"></Label>
-                    <Label FontSize="30" Name="lbl_type" Content="ROCK"></Label>
+                    <Label FontSize="26" Content="Type:"></Label>
+                    <Label FontSize="26" Name="lbl_type" Content="ROCK"></Label>
                 </StackPanel>
 
             </StackPanel>
@@ -58,16 +58,17 @@
         <!--<Border BorderBrush="Black" BorderThickness="2" Grid.RowSpan="2" Grid.Column="2">-->
             <Grid Name="chosenSongsGrid" Grid.RowSpan="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Width="auto" Height="50">
-                <Label HorizontalAlignment="Center"  FontSize="30" Content="Chosen songs"></Label>
-                <k:KinectTileButton Name="playlistPlay" Label=""  Height="auto" Width="auto" FontSize="30" Click="KinectTileButton_Click_1">
-                    <k:KinectTileButton.Background>
-                        <ImageBrush ImageSource="Resources/Player_icon/play.png" TileMode="FlipXY"/>
-                    </k:KinectTileButton.Background>
+                <k:KinectTileButton Name="playlistPlay" Visibility="Visible" Label=""  Height="auto" HorizontalAlignment="Stretch" FontSize="10" Click="KinectTileButton_Click_1" Background="{x:Null}" BorderBrush="{x:Null}">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Width="auto" Height="auto">
+                        <Label HorizontalAlignment="Center"  FontSize="25" Content="Chosen songs"></Label>
+                        <Image Source="Resources/Player_icon/play.png"></Image>
+                    </StackPanel>
                 </k:KinectTileButton>
-                <k:KinectTileButton Name="backToPlaylist" Label="" Visibility="Collapsed" Height="auto" Width="auto" FontSize="30" Click="KinectTileButton_Click_2">
-                    <k:KinectTileButton.Background>
-                        <ImageBrush ImageSource="Resources/back.png" TileMode="FlipXY"/>
-                    </k:KinectTileButton.Background>
+                <k:KinectTileButton Name="backToPlaylist" Label="" Visibility="Collapsed" Height="auto" HorizontalAlignment="Stretch"  FontSize="12" Click="KinectTileButton_Click_2" Background="{x:Null}" BorderBrush="{x:Null}">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Width="auto" Height="auto">
+                        <Label HorizontalAlignment="Center"  FontSize="25" Content="Chosen songs"></Label>
+                        <Image Source="Resources/back.png"></Image>
+                    </StackPanel>
                 </k:KinectTileButton>
             </StackPanel>
                 <k:KinectScrollViewer Grid.RowSpan="2" Grid.Column="2" HorizontalAlignment="Stretch" Margin="0,50,0,0" VerticalAlignment="Stretch" ContentMargin="0">

@@ -179,6 +179,7 @@ namespace Player
             scrollChosenList.Children.Add(btn);
             MainWindow.chosenSongs = this.getChosenSongs();
             this.updateInfo(str);
+
         }
 
         private void removeSong(object sender, RoutedEventArgs args)
@@ -370,7 +371,7 @@ namespace Player
             allSongsGrid.Visibility = System.Windows.Visibility.Collapsed;
             playerContainer.Children.Add(new player(getChosenSongs()));
             playerContainer.Visibility = System.Windows.Visibility.Visible;
-            playlistPlay.Visibility = System.Windows.Visibility.Hidden;
+            playlistPlay.Visibility = System.Windows.Visibility.Collapsed;
             backToPlaylist.Visibility = System.Windows.Visibility.Visible;
         }
 
