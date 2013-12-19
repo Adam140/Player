@@ -250,7 +250,7 @@ namespace Player
             grid.ColumnDefinitions.Add(columnDefinition1);
             grid.ColumnDefinitions.Add(columnDefinition2);
             grid.RowDefinitions.Add(rowDefinition1);
-            grid.Background = Brushes.Green;
+            //grid.Background = Brushes.Green;
 
 
             Image img = new Image { Source = getAudioCoverBitmap(path) };
@@ -266,15 +266,17 @@ namespace Player
             Grid.SetColumn(img, 0);
             Grid.SetRow(img, 0);
 
+            int fontSize = 30;
+            var fontColor = Brushes.Aqua;
 
             StackPanel panel = new StackPanel();
             //panel.Background = Brushes.Bisque;
             panel.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
             panel.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
-            panel.Children.Add(new Label { Content = artist });
-            panel.Children.Add(new Label { Content = title });
-            panel.Children.Add(new Label { Content = album });
-            panel.Background = Brushes.Yellow;
+            panel.Children.Add(new Label { Content = artist, Foreground = fontColor, FontSize = fontSize });
+            panel.Children.Add(new Label { Content = title, Foreground = fontColor, FontSize = fontSize });
+            panel.Children.Add(new Label { Content = album, Foreground = fontColor, FontSize = fontSize });
+            //panel.Background = Brushes.Yellow;
            
             //panel.Background = Brushes.Blue;
             grid.Children.Add(panel);
