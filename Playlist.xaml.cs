@@ -317,13 +317,7 @@ namespace Player
 
         private void KinectTileButton_Click_1(object sender, RoutedEventArgs e)
         {
-            songInformationGrid.Visibility = System.Windows.Visibility.Collapsed;
-            songCover.Visibility = System.Windows.Visibility.Collapsed;
-            allSongsGrid.Visibility = System.Windows.Visibility.Collapsed;
-            playerContainer.Children.Add(new player(getChosenSongs()));
-            playerContainer.Visibility = System.Windows.Visibility.Visible;
-            playlistPlay.Visibility = System.Windows.Visibility.Hidden;
-            backToPlaylist.Visibility = System.Windows.Visibility.Visible;
+            this.setPlayerVisible();
             foreach(object child in scrollChosenList.Children)
             {
                 (child as KinectTileButton).Click -= removeSong;
@@ -338,6 +332,16 @@ namespace Player
             ViewSwitcher.Switch(this);
         }
 
+        public void setPlayerVisible()
+        {
+            songInformationGrid.Visibility = System.Windows.Visibility.Collapsed;
+            songCover.Visibility = System.Windows.Visibility.Collapsed;
+            allSongsGrid.Visibility = System.Windows.Visibility.Collapsed;
+            playerContainer.Children.Add(new player(getChosenSongs()));
+            playerContainer.Visibility = System.Windows.Visibility.Visible;
+            playlistPlay.Visibility = System.Windows.Visibility.Hidden;
+            backToPlaylist.Visibility = System.Windows.Visibility.Visible;
+        }
 
         public void setPlaylistVisible()
         {

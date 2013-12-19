@@ -202,6 +202,23 @@ namespace Player
         {
             switch (gestureType)
             {
+                case GestureType.JoinedHands:
+                    if(playlist != null)
+                    {
+                        if (playlist.backToPlaylist.Visibility == System.Windows.Visibility.Visible)
+                        {
+                            playlist.setPlaylistVisible();
+                            playlist.updateAudioList();
+                            //ViewSwitcher.Switch(playlist);
+
+                        }
+                        else
+                        {
+                            playlist.setPlayerVisible();
+                            playlist.updateAudioList();
+                        }
+                    }
+                    break;
                 case GestureType.SwipeLeft:
                     if(helpContent.Visibility == Visibility.Visible)
                         helpContent.Visibility = Visibility.Hidden;
