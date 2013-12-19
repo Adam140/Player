@@ -235,21 +235,23 @@ namespace Player
             string title = tagFile.Tag.Title;
             //string genre = tagFile.Tag.FirstGenre;
             Grid grid = new Grid();
+            grid.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            grid.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
             //grid.Width = new GridLength(1, GridUnitType.Star);
             // Create column definitions.
-            ColumnDefinition columnDefinition1 = new ColumnDefinition();
-            ColumnDefinition columnDefinition2 = new ColumnDefinition();
-            columnDefinition1.Width = new GridLength(0.4, GridUnitType.Star);
-            columnDefinition2.Width = new GridLength(0.6, GridUnitType.Star);
+            //ColumnDefinition columnDefinition1 = new ColumnDefinition();
+            //ColumnDefinition columnDefinition2 = new ColumnDefinition();
+            //columnDefinition1.Width = new GridLength(0.4, GridUnitType.Star);
+            //columnDefinition2.Width = new GridLength(0.6, GridUnitType.Star);
 
             // Create row definitions.
             RowDefinition rowDefinition1 = new RowDefinition();
             rowDefinition1.Height = new GridLength(1.0, GridUnitType.Star);
 
             // Attached definitions to grid.
-            grid.ColumnDefinitions.Add(columnDefinition1);
-            grid.ColumnDefinitions.Add(columnDefinition2);
-            grid.RowDefinitions.Add(rowDefinition1);
+            //grid.ColumnDefinitions.Add(columnDefinition1);
+            //grid.ColumnDefinitions.Add(columnDefinition2);
+            //grid.RowDefinitions.Add(rowDefinition1);
             //grid.Background = Brushes.Green;
 
 
@@ -259,33 +261,44 @@ namespace Player
 
             StackPanel panel2 = new StackPanel();
             //panel.Background = Brushes.Bisque;
-            panel2.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
-            panel2.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+            panel2.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            panel2.VerticalAlignment = System.Windows.VerticalAlignment.Center;
             panel2.Children.Add(img);
             grid.Children.Add(panel2);
-            Grid.SetColumn(img, 0);
-            Grid.SetRow(img, 0);
+            //Grid.SetColumn(img, 0);
+            //Grid.SetRow(img, 0);
 
             int fontSize = 30;
-            var fontColor = Brushes.Aqua;
+            var fontColor = Brushes.White;
 
             StackPanel panel = new StackPanel();
             //panel.Background = Brushes.Bisque;
-            panel.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
-            panel.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+            panel.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+            panel.VerticalAlignment = System.Windows.VerticalAlignment.Center;
             panel.Children.Add(new Label { Content = artist, Foreground = fontColor, FontSize = fontSize });
             panel.Children.Add(new Label { Content = title, Foreground = fontColor, FontSize = fontSize });
             panel.Children.Add(new Label { Content = album, Foreground = fontColor, FontSize = fontSize });
-            //panel.Background = Brushes.Yellow;
-           
+            //panel.Background.Opacity = 0.7;
+            SolidColorBrush c = new SolidColorBrush();
+            c.Color = Color.FromRgb(0,0,0);
+            c.Opacity = 0.7;
+            panel.Background = c;
+
+            //Border myBorder1 = new Border();
+            ////myBorder1.Background = Brushes.SkyBlue;
+            //myBorder1.BorderBrush = Brushes.SkyBlue;
+            //myBorder1.BorderThickness = new Thickness(5);
+            //myBorder1.Child = panel;
+
+
             //panel.Background = Brushes.Blue;
             grid.Children.Add(panel);
-            Grid.SetColumn(panel, 1);
-            Grid.SetRow(panel, 0);
+            //Grid.SetColumn(panel, 1);
+            //Grid.SetRow(panel, 0);
             //grid.Background = Brushes.Bisque;
             KinectTileButton kin = new KinectTileButton { Content = grid };
             kin.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
-            kin.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+            kin.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             kin.Width = allSongsGrid.Width;
             kin.Background = Brushes.Black ;
             return kin;
@@ -387,9 +400,12 @@ namespace Player
 
         public void setActiveSong(KinectTileButton btn)
         {
-            btn.Background = Brushes.Coral;
+            btn.BorderBrush = Brushes.Gold;
+            btn.BorderThickness = new Thickness(5.0);
+
             if (this.activeElement != null)
-                this.activeElement.Background = null;
+                this.activeElement.BorderThickness = new Thickness(0.0);
+            
             this.activeElement = btn;
 
         }
