@@ -61,7 +61,7 @@
                 <Label HorizontalAlignment="Center"  FontSize="30" Content="Chosen songs"></Label>
                 <k:KinectTileButton Name="playlistPlay" Label=""  Height="auto" Width="auto" FontSize="12" Click="KinectTileButton_Click_1">
                     <k:KinectTileButton.Background>
-                        <ImageBrush ImageSource="Resources/play_icon.png" TileMode="FlipXY"/>
+                        <ImageBrush ImageSource="Resources/Player_icon/play.png" TileMode="FlipXY"/>
                     </k:KinectTileButton.Background>
                 </k:KinectTileButton>
                 <k:KinectTileButton Name="backToPlaylist" Label="" Visibility="Collapsed" Height="auto" Width="auto" FontSize="12" Click="KinectTileButton_Click_2">

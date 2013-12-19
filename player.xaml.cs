@@ -31,7 +31,18 @@ namespace Player
         int currentFileIndex = 0;
         DispatcherTimer timer;
 
-        public player()
+        private static player instance = null;
+
+        static public player getInstance(String[] array)
+        {
+            if (instance == null)
+                instance = new player(array);
+            else
+                instance.setFileList(array);
+
+            return instance;
+        }
+        public player(String[] filesList)
         {
             InitializeComponent();
             timer = new DispatcherTimer();
@@ -40,27 +51,14 @@ namespace Player
             photoElement.Width = 100;
             photoElement.Height = 100;
 
-        }
+            if (filesList == null || filesList.Length == 0 )
+               this.filesList = Directory.GetFiles(MainWindow.mainDir + @"\Multimedia");
+            else
+                this.filesList = filesList;
 
-        public player(String mainDir)
-            : this()
-        {
-            if (mainDir == "" || mainDir == null)
-                mainDir = MainWindow.mainDir;
-            filesList = Directory.GetFiles(mainDir + @"\Multimedia");
-
-            coversList = Directory.GetFiles(mainDir + "/Multimedia/Covers", "*");
-            filesList = (from file in filesList let name = System.IO.Path.GetFileNameWithoutExtension(file) where !name.StartsWith("cover_") select file).ToArray();
-            typeOfMedia(filesList[0], false);
-        }
-
-        public player(String[] filesList)
-            : this()
-        {
-            this.filesList = filesList;
             coversList = Directory.GetFiles(MainWindow.mainDir + "/Multimedia/covers", "*");
-            filesList = (from file in filesList let name = System.IO.Path.GetFileNameWithoutExtension(file) where !name.StartsWith("cover_") select file).ToArray();
-            typeOfMedia(filesList[0], false);
+            filesList = (from file in this.filesList let name = System.IO.Path.GetFileNameWithoutExtension(file) where !name.StartsWith("cover_") select file).ToArray();
+            typeOfMedia(this.filesList[0], false);
         }
 
         public void UtilizeState(object mainDir)
@@ -103,7 +101,7 @@ namespace Player
                     break;
                 case "buttonPrevious":
                 case "buttonFirst":
-                    if (mediaElement != null && mediaElement.Position.TotalSeconds > 2)
+                    if (mediaElement.IsLoaded && mediaElement != null && mediaElement.Position.TotalSeconds > 2)
                     {
                         mediaElement.Stop();
                         mediaElement.Play();
@@ -119,12 +117,12 @@ namespace Player
             }
         }
 
-        private void SeekToMediaPosition(object sender, RoutedPropertyChangedEventArgs<double> args)
-        {
-            int SliderValue = (int)slider.Value;
-            TimeSpan ts = new TimeSpan(0, 0, 0, 0, SliderValue);
-            mediaElement.Position = ts;
-        }
+        //private void SeekToMediaPosition(object sender, RoutedPropertyChangedEventArgs<double> args)
+        //{
+        //    int SliderValue = (int)slider.Value;
+        //    TimeSpan ts = new TimeSpan(0, 0, 0, 0, SliderValue);
+        //    mediaElement.Position = ts;
+        //}
             
         private void mediaOpened(object sender, EventArgs e)
         {
@@ -165,7 +163,7 @@ namespace Player
             {
                 playerControlGrid.Visibility = Visibility.Visible;
                 photoControlGrid.Visibility = Visibility.Hidden;
-                photoElement.Visibility = Visibility.Hidden;
+                photoElement.Visibility = Visibility.Visible;
                 slider.Visibility = Visibility.Visible;
                 timesLabel.Visibility = Visibility.Visible;
                 mediaElement.Visibility = Visibility.Hidden;
@@ -200,7 +198,7 @@ namespace Player
                 bi3.UriSource = new Uri(file, UriKind.Absolute);
                 bi3.EndInit();
                 photoElement.Source = bi3;
-                photoElement.Visibility = Visibility.Hidden;
+                photoElement.Visibility = Visibility.Visible;
             }
 
         }
@@ -251,6 +249,10 @@ namespace Player
             st.ScaleX += zoom;
             st.ScaleY += zoom;
         }
-
+        public void setFileList(String[] fileList)
+        {
+            if (fileList != null)
+                this.filesList = filesList;
+        }
     }
 }
