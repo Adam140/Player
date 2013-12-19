@@ -13,7 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Kinect;
-using Microsoft.Kinect.Toolkit;
 using Microsoft.Kinect.Toolkit.Controls;
 using Fizbin.Kinect.Gestures;
 
@@ -40,7 +39,7 @@ namespace Player
             InitializeComponent();
             ViewSwitcher.SetMainWindow(this);
             ViewSwitcher.Switch(mainMenu = new Menu(this));
-           // ViewSwitcher.Switch(new Playlist(@"D:\Studia\player\Multimedia"));
+
             gestureGenerator = new GestureGenerator();
             // Listen to recognized gestures
             gestureGenerator.GestureRecognized += gestureGenerator_GestureRecognized;
@@ -209,19 +208,48 @@ namespace Player
                         ViewSwitcher.Switch(mainMenu);
                     break;
                 case GestureType.WaveLeft:
-                    //if(playerScreen.mediaElement.IsLoaded && playerScreen.playerControlGrid.Visibility == Visibility.Visible)
-                    //{
-                    //playerScreen.buttonRewind.RaiseEvent((new RoutedEventArgs(Button.ClickEvent)));
-                    //}
+                    if(playerScreen.mediaElement.IsLoaded && playerScreen.playerControlGrid.Visibility == Visibility.Visible)
+                    {
+                        playerScreen.mediaElement.Position += new TimeSpan(0, 0, 0, 2, 0); ;
+                    }
                     break;
                 case GestureType.WaveRight:
-                    //if (playerScreen.mediaElement.IsLoaded && playerScreen.playerControlGrid.Visibility == Visibility.Visible)
-                    //{
-                    //    playerScreen.buttonForward.RaiseEvent((new RoutedEventArgs(Button.ClickEvent)));
-                    //}
+                    if (playerScreen.mediaElement.IsLoaded && playerScreen.playerControlGrid.Visibility == Visibility.Visible)
+                    {
+                        playerScreen.mediaElement.Position += new TimeSpan(0, 0, 0, 2, 0); ;
+                    }
                     break;
-
                 case GestureType.ZoomIn:
+                    if(playerScreen.photoElement.Visibility == Visibility.Visible)
+                    {
+                        playerScreen.photoElement.Height = playerScreen.photoElement.Height * 1.2;
+                        playerScreen.photoElement.Width = playerScreen.photoElement.Width * 1.2;
+                    }
+                    break;
+                case GestureType.ZoomOut:
+                    if (playerScreen.photoElement.Visibility == Visibility.Visible)
+                    {
+                        playerScreen.photoElement.Height = playerScreen.photoElement.Height * 0.8;
+                        playerScreen.photoElement.Width = playerScreen.photoElement.Width * 0.8;
+                    }
+                    break;
+                case GestureType.SwipeDownLeft:
+                    if (playerScreen.mediaElement.IsLoaded && playerScreen.playerControlGrid.Visibility == Visibility.Visible)
+                    {
+                        if (playerScreen.mediaElement != null && playerScreen.mediaElement.Position.TotalSeconds > 2)
+                        {
+                            playerScreen.mediaElement.Stop();
+                            playerScreen.mediaElement.Play();
+                        }
+                        else
+                            playerScreen.nextToPlay(-1);
+                    }
+                    break;
+                case GestureType.SwipeRight:
+                    if (playerScreen.mediaElement.IsLoaded && playerScreen.playerControlGrid.Visibility == Visibility.Visible)
+                    {
+                       playerScreen.nextToPlay(1);
+                    }
                     break;
 
                 default:

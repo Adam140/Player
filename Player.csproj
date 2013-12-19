@@ -156,6 +156,7 @@
     <Resource Include="Resources\flag_uk.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Multimedia\Covers\" />
     <Folder Include="Screens\" />
   </ItemGroup>
   <ItemGroup>

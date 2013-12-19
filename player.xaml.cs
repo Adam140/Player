@@ -26,7 +26,6 @@ namespace Player
     /// </summary>
     public partial class player : UserControl, ISwitchable
     {
-        const String dir = @"D:\Studia\player\Multimedia";    // folder where all multimedia files are stored
         String[] filesList;
         String[] coversList;
         int currentFileIndex = 0;
@@ -38,6 +37,8 @@ namespace Player
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(400);
             timer.Tick += new EventHandler(timer_Tick);
+            photoElement.Width = 100;
+            photoElement.Height = 100;
 
         }
 
@@ -45,7 +46,7 @@ namespace Player
             : this()
         {
             if (mainDir == "" || mainDir == null)
-                mainDir = dir;
+                mainDir = MainWindow.mainDir;
             filesList = Directory.GetFiles(mainDir);
 
             coversList = Directory.GetFiles(mainDir + "/covers", "*");
@@ -57,7 +58,7 @@ namespace Player
             : this()
         {
             this.filesList = filesList;
-            coversList = Directory.GetFiles(dir+"/covers", "*");
+            coversList = Directory.GetFiles(MainWindow.mainDir + "/covers", "*");
             filesList = (from file in filesList let name = System.IO.Path.GetFileNameWithoutExtension(file) where !name.StartsWith("cover_") select file).ToArray();
             typeOfMedia(filesList[0], false);
         }
@@ -144,7 +145,7 @@ namespace Player
             nextToPlay(1);
         }
 
-        private void nextToPlay(int direction)
+        public void nextToPlay(int direction)
         {
             currentFileIndex += direction;
             if (currentFileIndex >= filesList.Length)
@@ -241,6 +242,14 @@ namespace Player
 
             bi3.EndInit();
             photoElement.Source = bi3;
+        }
+
+        public static void Scale(Image img, int maxWidth, int maxHeight)
+        {
+            var st = (ScaleTransform)img.RenderTransform;
+            double zoom = .2;
+            st.ScaleX += zoom;
+            st.ScaleY += zoom;
         }
 
     }
