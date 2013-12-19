@@ -26,6 +26,7 @@ namespace Player
         String[] audioList;
         String[] coverList;
         ArrayList chosenList = new ArrayList();
+        KinectTileButton activeElement = null;
 
         public Playlist()
         {
@@ -34,7 +35,7 @@ namespace Player
         public Playlist(string mainDir)
         {
             InitializeComponent();
-            audioList = Directory.GetFiles(mainDir);
+            audioList = Directory.GetFiles(mainDir + "/Audio");
             coverList = Directory.GetFiles(mainDir + "/Covers");
             //aint i = 0;
             updateAudioList();
@@ -42,8 +43,15 @@ namespace Player
             //String artist = tagFile.Tag.FirstAlbumArtist;
             //String album = tagFile.Tag.Album;
             //String title = tagFile.Tag.Title;
+            imgPreview.Source = new BitmapImage(new Uri(@"/Multimedia/Covers/ACDC - The Very Best.jpg", UriKind.Relative));
+            
+        }
 
-
+        public Playlist(string mainDir, String[] chosenList) : this(mainDir)
+        {
+            this.chosenList = new ArrayList(chosenList.Length);
+            this.chosenList.AddRange(chosenList);
+            updateChosenList();
             
         }
 
@@ -75,6 +83,21 @@ namespace Player
 
         }
 
+        private void updateChosenList()
+        {
+            for (int i = 0; i < chosenList.Count; i++)
+            {
+                KinectTileButton btn = presentAudioFile(chosenList[i].ToString());
+                btn.Name = "audio" + i.ToString();
+                btn.Click += removeSong;
+                btn.MouseEnter += songHover;
+                KinectRegion.AddHandPointerEnterHandler(btn, this.songHover);
+                scrollChosenList.Children.Add(btn);
+                this.updateInfo(btn.Name);
+
+            }
+        }
+
         private void songHover(object sender, RoutedEventArgs args)
         {
             string str = (sender as KinectTileButton).Name.ToString();
@@ -88,15 +111,29 @@ namespace Player
             
             int i = Convert.ToInt32(tmp);
             chosenList.Add(audioList[i]);
-                var btn = new KinectCircleButton
-                {
-                    Name = "chosen" + str,
-                    Content = new Label { Content = audioList[i], FontSize=50 },
-                    Height = 200,
-                    //FontSize = 36
-                };
-                scrollChosenList.Children.Add(presentAudioFile(i));
+            KinectTileButton btn = presentAudioFile(i);
+            btn.Click += removeSong;
+            btn.MouseEnter += songHover;
+            btn.Name = (sender as KinectTileButton).Name.ToString();
+            KinectRegion.AddHandPointerEnterHandler(btn, this.songHover);
+   
+            scrollChosenList.Children.Add(btn);
             this.updateInfo(str);
+        }
+
+        private void removeSong(object sender, RoutedEventArgs args)
+        {
+            scrollChosenList.Children.Remove((sender as KinectTileButton));
+            string str = (sender as KinectTileButton).Name.ToString();
+            string tmp = str.Replace("audio","");
+            
+            int i = Convert.ToInt32(tmp);
+            chosenList.Remove(audioList[i]);
+        }
+
+        private void activeSong(object sender, RoutedEventArgs args)
+        {
+            setActiveSong(sender as KinectTileButton);
         }
 
         public void test()
@@ -136,7 +173,7 @@ namespace Player
             string title = tagFile.Tag.Title;
             //string genre = tagFile.Tag.FirstGenre;
             Grid grid = new Grid();
-
+            //grid.Width = new GridLength(1, GridUnitType.Star);
             // Create column definitions.
             ColumnDefinition columnDefinition1 = new ColumnDefinition();
             ColumnDefinition columnDefinition2 = new ColumnDefinition();
@@ -145,26 +182,38 @@ namespace Player
 
             // Create row definitions.
             RowDefinition rowDefinition1 = new RowDefinition();
-            rowDefinition1.Height = new GridLength(1, GridUnitType.Star);
+            rowDefinition1.Height = new GridLength(1.0, GridUnitType.Star);
 
             // Attached definitions to grid.
             grid.ColumnDefinitions.Add(columnDefinition1);
             grid.ColumnDefinitions.Add(columnDefinition2);
             grid.RowDefinitions.Add(rowDefinition1);
+            grid.Background = Brushes.Green;
+
 
             Image img = new Image { Source = getAudioCoverBitmap(path) };
-            grid.Children.Add(img);
+            img.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+            img.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+
+            StackPanel panel2 = new StackPanel();
+            //panel.Background = Brushes.Bisque;
+            panel2.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+            panel2.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+            panel2.Children.Add(img);
+            grid.Children.Add(panel2);
             Grid.SetColumn(img, 0);
             Grid.SetRow(img, 0);
-            grid.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
-            grid.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+
 
             StackPanel panel = new StackPanel();
+            //panel.Background = Brushes.Bisque;
             panel.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
             panel.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
-            panel.Children.Add(new Label{ Content = artist });
+            panel.Children.Add(new Label { Content = artist });
             panel.Children.Add(new Label { Content = title });
             panel.Children.Add(new Label { Content = album });
+            panel.Background = Brushes.Yellow;
+           
             //panel.Background = Brushes.Blue;
             grid.Children.Add(panel);
             Grid.SetColumn(panel, 1);
@@ -173,7 +222,8 @@ namespace Player
             KinectTileButton kin = new KinectTileButton { Content = grid };
             kin.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
             kin.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
-            kin.Width = panel.Width;
+            kin.Width = allSongsGrid.Width;
+            kin.Background = Brushes.Black ;
             return kin;
             //return artist + " - " + title + "(" + album + ")";
             
@@ -215,13 +265,36 @@ namespace Player
 
         }
 
-        private void KinectCircleButton_Click_1(object sender, RoutedEventArgs e)
+
+        private void KinectTileButton_Click_1(object sender, RoutedEventArgs e)
         {
             songInformationGrid.Visibility = System.Windows.Visibility.Collapsed;
             songCover.Visibility = System.Windows.Visibility.Collapsed;
             allSongsGrid.Visibility = System.Windows.Visibility.Collapsed;
             playerContainer.Children.Add(new player(getChosenSongs()));
             playerContainer.Visibility = System.Windows.Visibility.Visible;
+            playlistPlay.Visibility = System.Windows.Visibility.Hidden;
+            foreach(object child in scrollChosenList.Children)
+            {
+                (child as KinectTileButton).Click -= removeSong;
+                (child as KinectTileButton).Click += activeSong;
+            }       
+        }
+
+        public void setActiveSong(int index)
+        {
+            UIElement tmp = scrollChosenList.Children[index];
+            KinectTileButton btn = (tmp as KinectTileButton);
+            setActiveSong(btn);
+            
+        }
+
+        public void setActiveSong(KinectTileButton btn)
+        {
+            btn.Background = Brushes.Coral;
+            if (this.activeElement != null)
+                this.activeElement.Background = null;
+            this.activeElement = btn;
 
         }
     }
