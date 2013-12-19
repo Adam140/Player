@@ -161,17 +161,6 @@
     <Folder Include="Screens\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\background.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\pause_icon.png" />
-    <Resource Include="Resources\play_icon.png" />
-    <Resource Include="Resources\stop_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\help_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Player_icon\forward.png" />
     <Resource Include="Resources\Player_icon\pause.png" />
     <Resource Include="Resources\Player_icon\play.png" />
@@ -185,6 +174,9 @@
     <Resource Include="Resources\pattern.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\minus.png" />
+    <Resource Include="Resources\mute.png" />
+    <Resource Include="Resources\plus.png" />
     <Resource Include="Resources\Menu_icon\top.png" />
     <Resource Include="Resources\Help_pages\under-construction.gif" />
     <Resource Include="Resources\Help_pages\PlayerScreen.png" />
@@ -215,7 +207,6 @@
     </Content>
     <Resource Include="Resources\Player_icon\first.png" />
     <Resource Include="Resources\Player_icon\last.png" />
-    <Resource Include="Resources\pattern2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

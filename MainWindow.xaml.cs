@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using Microsoft.Kinect;
 using Microsoft.Kinect.Toolkit.Controls;
 using Fizbin.Kinect.Gestures;
+using System.Threading;
 
 namespace Player
 {
@@ -30,7 +31,6 @@ namespace Player
         private GestureGenerator gestureGenerator;
 
         public Menu mainMenu;
-        public player playerScreen;
         public Playlist playlist;
         public static string[] chosenSongs;
         //public static string mainDir = @"D:\Studia\player\";
@@ -54,6 +54,12 @@ namespace Player
 
             var regionSensorBinding = new Binding("Kinect") { Source = this.sensorChooser };
             BindingOperations.SetBinding(this.kinectRegion, KinectRegion.KinectSensorProperty, regionSensorBinding);
+
+            KinectRegion.AddHandPointerEnterHandler(buttonMinus, this.volumneChanged);
+            KinectRegion.AddHandPointerLeaveHandler(buttonMinus, this.volumneChanged);
+
+            KinectRegion.AddHandPointerEnterHandler(buttonPlus, this.volumneChanged);
+            KinectRegion.AddHandPointerLeaveHandler(buttonPlus, this.volumneChanged);
           
 
         }
@@ -113,6 +119,12 @@ namespace Player
             
             switch (name)
             {
+                case "buttonMute":
+                    player.getInstance(null).mediaElement.Volume = 0;
+                    break;
+                case "buttonVolumne":
+                    player.getInstance(null).mediaElement.Volume = 1;;
+                    break;
                 case "buttonBack":
                     ViewSwitcher.Switch(mainMenu);
                     break;
@@ -124,7 +136,7 @@ namespace Player
                     BitmapImage bi = new BitmapImage();
                     bi.BeginInit();
                     //TODO fix below if condition to looking if file exists in relative path
-                    if( System.IO.File.Exists(MainWindow.mainDir + @"Resources/Help_pages/" + currentViewName + ".png"))
+                    if( System.IO.File.Exists(MainWindow.mainDir + @"/Resources/Help_pages/" + currentViewName + ".png"))
                         bi.UriSource = new Uri(@"Resources/Help_pages/" + currentViewName + ".png", UriKind.Relative);   
                     else
                         bi.UriSource = new Uri(@"Resources/Help_pages/under-construction.gif", UriKind.Relative);
@@ -135,12 +147,33 @@ namespace Player
             }
         }
 
-        private void volumneChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void volumneChanged(object sender, RoutedEventArgs args)
         {
-            if(playerScreen != null)
+            string senderName = (sender as KinectTileButton).Name.ToString();
+            Boolean isEnter = args.RoutedEvent.Name == "HandPointerEnter";
+
+            switch (senderName)
             {
-                playerScreen.mediaElement.Volume = sliderVolumn.Value / 10.0;
+                case "buttonMinus":
+                    if (isEnter)
+                        volumneChanged(-1);
+                    else
+                        volumneChanged(-1);
+                        break;
+                case "buttonPlus":
+                        if (isEnter)
+                            volumneChanged(1);
+                        else
+                            volumneChanged(1);
+                    break;
             }
+        }
+
+        private void volumneChanged(int direction)
+        {
+            //if (direction * 0.5 + sliderVolumn.Value > 0 && direction * 0.5 + sliderVolumn.Value < 10)
+            sliderVolumn.Value += direction * 0.5;
+            player.getInstance(null).mediaElement.Volume = sliderVolumn.Value / 10.0;
         }
 
         /// <summary>
@@ -201,6 +234,7 @@ namespace Player
 
         void gestureGenerator_GestureRecognized(GestureType gestureType, int trackingId)
         {
+            player p = player.getInstance(null);
             switch (gestureType)
             {
                 case GestureType.JoinedHands:
@@ -227,47 +261,47 @@ namespace Player
                         ViewSwitcher.Switch(mainMenu);
                     break;
                 case GestureType.WaveLeft:
-                    if(playerScreen.mediaElement.IsLoaded && playerScreen.playerControlGrid.Visibility == Visibility.Visible)
+                    if ("PlayerScreen".Equals(currentViewName) && p.mediaElement.IsLoaded && p.playerControlGrid.Visibility == Visibility.Visible)
                     {
-                        playerScreen.mediaElement.Position += new TimeSpan(0, 0, 0, 2, 0); ;
+                        p.mediaElement.Position += new TimeSpan(0, 0, 0, 2, 0); ;
                     }
                     break;
                 case GestureType.WaveRight:
-                    if (playerScreen.mediaElement.IsLoaded && playerScreen.playerControlGrid.Visibility == Visibility.Visible)
+                    if ("PlayerScreen".Equals(currentViewName) && p.mediaElement.IsLoaded && p.playerControlGrid.Visibility == Visibility.Visible)
                     {
-                        playerScreen.mediaElement.Position += new TimeSpan(0, 0, 0, 2, 0); ;
+                        p.mediaElement.Position += new TimeSpan(0, 0, 0, 2, 0); ;
                     }
                     break;
                 case GestureType.ZoomIn:
-                    if(playerScreen.photoElement.Visibility == Visibility.Visible)
+                    if("PlayerScreen".Equals(currentViewName) && p.photoElement.Visibility == Visibility.Visible)
                     {
-                        playerScreen.photoElement.Height = playerScreen.photoElement.Height * 2;
-                        playerScreen.photoElement.Width = playerScreen.photoElement.Width * 2;
+                        p.photoElement.Height = p.photoElement.Height * 2;
+                        p.photoElement.Width = p.photoElement.Width * 2;
                     }
                     break;
                 case GestureType.ZoomOut:
-                    if (playerScreen.photoElement.Visibility == Visibility.Visible)
+                    if ("PlayerScreen".Equals(currentViewName) && p.photoElement.Visibility == Visibility.Visible)
                     {
-                        playerScreen.photoElement.Height = playerScreen.photoElement.Height * 0.5;
-                        playerScreen.photoElement.Width = playerScreen.photoElement.Width * 0.5;
+                        p.photoElement.Height = p.photoElement.Height * 0.5;
+                        p.photoElement.Width = p.photoElement.Width * 0.5;
                     }
                     break;
                 case GestureType.SwipeDownLeft:
-                    if (playerScreen.mediaElement.IsLoaded && playerScreen.playerControlGrid.Visibility == Visibility.Visible)
+                    if ("PlayerScreen".Equals(currentViewName))
                     {
-                        if (playerScreen.mediaElement != null && playerScreen.mediaElement.Position.TotalSeconds > 2)
+                        if (p.mediaElement != null && p.mediaElement.Position.TotalSeconds > 2)
                         {
-                            playerScreen.mediaElement.Stop();
-                            playerScreen.mediaElement.Play();
+                            p.mediaElement.Stop();
+                            p.mediaElement.Play();
                         }
                         else
-                            playerScreen.nextToPlay(-1);
+                            p.nextToPlay(-1);
                     }
                     break;
-                case GestureType.SwipeRight:
-                    if (playerScreen.mediaElement.IsLoaded && playerScreen.playerControlGrid.Visibility == Visibility.Visible)
+                case GestureType.SwipeUpLeft:
+                    if ("PlayerScreen".Equals(currentViewName) && p.mediaElement.IsLoaded && p.playerControlGrid.Visibility == Visibility.Visible)
                     {
-                       playerScreen.nextToPlay(1);
+                       p.nextToPlay(1);
                     }
                     break;
 
@@ -275,6 +309,7 @@ namespace Player
                     break;
             }
         }
+
      
     }
 }

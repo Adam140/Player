@@ -38,7 +38,7 @@ namespace Player
             switch (name)
             {
                 case "buttonMultimedia":
-                    ViewSwitcher.Switch(mainWindow.playerScreen = new player(""));
+                    ViewSwitcher.Switch(player.getInstance(null));
                     break;
                 case "buttonAudio":
                     if (mainWindow.playlist != null)
