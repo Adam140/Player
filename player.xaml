@@ -8,8 +8,8 @@
              d:DesignHeight="800" d:DesignWidth="600" Name="PlayerScreen">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="90*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="20*"/>
         </Grid.RowDefinitions>      
 <!-- 
      ***********************************************************

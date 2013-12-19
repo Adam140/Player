@@ -55,11 +55,13 @@ namespace Player
             var regionSensorBinding = new Binding("Kinect") { Source = this.sensorChooser };
             BindingOperations.SetBinding(this.kinectRegion, KinectRegion.KinectSensorProperty, regionSensorBinding);
 
+            buttonMinus.MouseEnter += this.volumneChanged;
+            buttonPlus.MouseEnter += this.volumneChanged;
             KinectRegion.AddHandPointerEnterHandler(buttonMinus, this.volumneChanged);
-            KinectRegion.AddHandPointerLeaveHandler(buttonMinus, this.volumneChanged);
+            //KinectRegion.AddHandPointerLeaveHandler(buttonMinus, this.volumneChanged);
 
             KinectRegion.AddHandPointerEnterHandler(buttonPlus, this.volumneChanged);
-            KinectRegion.AddHandPointerLeaveHandler(buttonPlus, this.volumneChanged);
+            //KinectRegion.AddHandPointerLeaveHandler(buttonPlus, this.volumneChanged);
           
 
         }
@@ -120,9 +122,11 @@ namespace Player
             switch (name)
             {
                 case "buttonMute":
+                    sliderVolumn.Value = 0;
                     player.getInstance(null).mediaElement.Volume = 0;
                     break;
                 case "buttonVolumne":
+                    sliderVolumn.Value = 10.0;
                     player.getInstance(null).mediaElement.Volume = 1;;
                     break;
                 case "buttonBack":
@@ -155,15 +159,12 @@ namespace Player
             switch (senderName)
             {
                 case "buttonMinus":
-                    if (isEnter)
                         volumneChanged(-1);
-                    else
-                        volumneChanged(-1);
-                        break;
+                       break;
                 case "buttonPlus":
-                        if (isEnter)
-                            volumneChanged(1);
-                        else
+                        //if (isEnter)
+                        //    volumneChanged(1);
+                        //else
                             volumneChanged(1);
                     break;
             }
@@ -298,7 +299,7 @@ namespace Player
                             p.nextToPlay(-1);
                     }
                     break;
-                case GestureType.SwipeUpLeft:
+                case GestureType.SwipeDownRight:
                     if ("PlayerScreen".Equals(currentViewName) && p.mediaElement.IsLoaded && p.playerControlGrid.Visibility == Visibility.Visible)
                     {
                        p.nextToPlay(1);
