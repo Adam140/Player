@@ -230,8 +230,8 @@ namespace Player
         {
             TagLib.File tagFile = TagLib.File.Create(path);
             string artist = tagFile.Tag.FirstArtist;
-            //string album = tagFile.Tag.Album;
-            string album = "zxc";
+            string album = tagFile.Tag.Album;
+            //string album = "zxc";
             string title = tagFile.Tag.Title;
             //string genre = tagFile.Tag.FirstGenre;
             Grid grid = new Grid();
