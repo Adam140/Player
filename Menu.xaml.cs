@@ -48,7 +48,7 @@ namespace Player
                         ViewSwitcher.Switch(mainWindow.playlist);
                     }
                     else
-                        ViewSwitcher.Switch(mainWindow.playlist = new Playlist(@"D:\Studia\player\Multimedia"));
+                        ViewSwitcher.Switch(mainWindow.playlist = new Playlist(MainWindow.mainDir + @"\Multimedia"));
                     break;
 
                 case "buttonPictures":
@@ -59,7 +59,7 @@ namespace Player
                         ViewSwitcher.Switch(mainWindow.playlist);
                     }
                     else
-                        ViewSwitcher.Switch(mainWindow.playlist = new Playlist(@"D:\Studia\player\Multimedia"));
+                        ViewSwitcher.Switch(mainWindow.playlist = new Playlist(MainWindow.mainDir + @"\Multimedia"));
                     break;
             }
 

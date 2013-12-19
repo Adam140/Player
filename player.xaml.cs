@@ -47,9 +47,9 @@ namespace Player
         {
             if (mainDir == "" || mainDir == null)
                 mainDir = MainWindow.mainDir;
-            filesList = Directory.GetFiles(mainDir);
+            filesList = Directory.GetFiles(mainDir + @"\Multimedia");
 
-            coversList = Directory.GetFiles(mainDir + "/covers", "*");
+            coversList = Directory.GetFiles(mainDir + "/Multimedia/Covers", "*");
             filesList = (from file in filesList let name = System.IO.Path.GetFileNameWithoutExtension(file) where !name.StartsWith("cover_") select file).ToArray();
             typeOfMedia(filesList[0], false);
         }
@@ -58,7 +58,7 @@ namespace Player
             : this()
         {
             this.filesList = filesList;
-            coversList = Directory.GetFiles(MainWindow.mainDir + "/covers", "*");
+            coversList = Directory.GetFiles(MainWindow.mainDir + "/Multimedia/covers", "*");
             filesList = (from file in filesList let name = System.IO.Path.GetFileNameWithoutExtension(file) where !name.StartsWith("cover_") select file).ToArray();
             typeOfMedia(filesList[0], false);
         }
@@ -165,7 +165,7 @@ namespace Player
             {
                 playerControlGrid.Visibility = Visibility.Visible;
                 photoControlGrid.Visibility = Visibility.Hidden;
-                photoElement.Visibility = Visibility.Visible;
+                photoElement.Visibility = Visibility.Hidden;
                 slider.Visibility = Visibility.Visible;
                 timesLabel.Visibility = Visibility.Visible;
                 mediaElement.Visibility = Visibility.Hidden;
@@ -200,7 +200,7 @@ namespace Player
                 bi3.UriSource = new Uri(file, UriKind.Absolute);
                 bi3.EndInit();
                 photoElement.Source = bi3;
-                photoElement.Visibility = Visibility.Visible;
+                photoElement.Visibility = Visibility.Hidden;
             }
 
         }
