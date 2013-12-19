@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:k="http://schemas.microsoft.com/kinect/2013"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="800" Name="PlayerScreen">
+             d:DesignHeight="800" d:DesignWidth="600" Name="PlayerScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="90*"/>
