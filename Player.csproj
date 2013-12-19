@@ -156,6 +156,7 @@
     <Resource Include="Resources\flag_uk.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Multimedia\Audio\" />
     <Folder Include="Multimedia\Covers\" />
     <Folder Include="Screens\" />
   </ItemGroup>
@@ -184,37 +185,7 @@
     <Resource Include="Resources\pattern.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Multimedia\Audio\01 - Hard as a rock.mp3" />
-    <Content Include="Multimedia\Audio\01_dio-stand_up_and_shout-amrc.mp3" />
-    <Content Include="Multimedia\Audio\02 - Let there be rock.mp3" />
-    <Content Include="Multimedia\Audio\02_dio-holy_diver-amrc.mp3" />
-    <Content Include="Multimedia\Audio\03 - Thunderstruck.mp3" />
-    <Content Include="Multimedia\Audio\03_dio-gypsy-amrc.mp3" />
-    <Content Include="Multimedia\Audio\04 - Dirty deeds done dirt cheap.mp3" />
-    <Content Include="Multimedia\Audio\04_dio-caught_in_the_middle-amrc.mp3" />
-    <Content Include="Multimedia\Audio\05 - Big gun.mp3" />
-    <Content Include="Multimedia\Audio\05_dio-dont_talk_to_strangers-amrc.mp3" />
-    <Content Include="Multimedia\Audio\06 - The jack.mp3" />
-    <Content Include="Multimedia\Audio\06_dio-straight_through_the_heart-amrc.mp3" />
-    <Content Include="Multimedia\Audio\07 - Heatseeker.mp3" />
-    <Content Include="Multimedia\Audio\07_dio-invisible-amrc.mp3" />
-    <Content Include="Multimedia\Audio\08 - Jailbreak.mp3" />
-    <Content Include="Multimedia\Audio\08_dio-rainbow_in_the_dark-amrc.mp3" />
-    <Content Include="Multimedia\Audio\09 - You shook me all night long.mp3" />
-    <Content Include="Multimedia\Audio\09_dio-shame_on_the_night-amrc.mp3" />
-    <Content Include="Multimedia\Audio\10 - Rocknroll damnation.mp3" />
-    <Content Include="Multimedia\Audio\11 - Shake your foundations.mp3" />
-    <Content Include="Multimedia\Audio\12 - TNT.mp3" />
-    <Content Include="Multimedia\Audio\13 - Who made who.mp3" />
-    <Content Include="Multimedia\Audio\14 - Highway to hell.mp3" />
-    <Content Include="Multimedia\Audio\15 - Whole lotta rosie.mp3" />
-    <Content Include="Multimedia\Audio\16 - For those about to rock we salute you.mp3" />
-    <Content Include="Multimedia\Audio\17 - Big balls.mp3" />
-    <Content Include="Multimedia\Audio\18 - Rocker.mp3" />
     <Resource Include="Resources\Menu_icon\top.png" />
-    <Resource Include="Multimedia\Covers\ACDC - The Very Best.jpg" />
-    <Resource Include="Multimedia\Covers\Dio - Holy Diver.jpg" />
-    <Resource Include="Multimedia\Covers\zxc.jpg" />
     <Resource Include="Resources\Help_pages\under-construction.gif" />
     <Resource Include="Resources\Help_pages\PlayerScreen.png" />
     <Resource Include="Resources\exit.png" />

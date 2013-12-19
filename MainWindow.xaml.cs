@@ -33,7 +33,8 @@ namespace Player
         public player playerScreen;
         public Playlist playlist;
         public static string[] chosenSongs;
-        public static string mainDir = @"D:\Studia\player\Multimedia";
+        //public static string mainDir = @"D:\Studia\player\";
+        public static string mainDir = @"C:\Users\Adam\Documents\GitHub\Player";
 
         public MainWindow()
         {
@@ -123,7 +124,7 @@ namespace Player
                     BitmapImage bi = new BitmapImage();
                     bi.BeginInit();
                     //TODO fix below if condition to looking if file exists in relative path
-                    if( System.IO.File.Exists(@"Resources/Help_pages/" + currentViewName + ".png"))
+                    if( System.IO.File.Exists(MainWindow.mainDir + @"Resources/Help_pages/" + currentViewName + ".png"))
                         bi.UriSource = new Uri(@"Resources/Help_pages/" + currentViewName + ".png", UriKind.Relative);   
                     else
                         bi.UriSource = new Uri(@"Resources/Help_pages/under-construction.gif", UriKind.Relative);
@@ -240,15 +241,15 @@ namespace Player
                 case GestureType.ZoomIn:
                     if(playerScreen.photoElement.Visibility == Visibility.Visible)
                     {
-                        playerScreen.photoElement.Height = playerScreen.photoElement.Height * 1.2;
-                        playerScreen.photoElement.Width = playerScreen.photoElement.Width * 1.2;
+                        playerScreen.photoElement.Height = playerScreen.photoElement.Height * 2;
+                        playerScreen.photoElement.Width = playerScreen.photoElement.Width * 2;
                     }
                     break;
                 case GestureType.ZoomOut:
                     if (playerScreen.photoElement.Visibility == Visibility.Visible)
                     {
-                        playerScreen.photoElement.Height = playerScreen.photoElement.Height * 0.8;
-                        playerScreen.photoElement.Width = playerScreen.photoElement.Width * 0.8;
+                        playerScreen.photoElement.Height = playerScreen.photoElement.Height * 0.5;
+                        playerScreen.photoElement.Width = playerScreen.photoElement.Width * 0.5;
                     }
                     break;
                 case GestureType.SwipeDownLeft:
