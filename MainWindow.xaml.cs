@@ -31,9 +31,9 @@ namespace Player
         private GestureGenerator gestureGenerator;
 
         public Menu mainMenu;
-        public Playlist playlist;
+        //public Playlist playlist;
         public static string[] chosenSongs;
-        public static string mainDir = @"D:\Studia\player\";
+        public static string mainDir = @"D:\Studia\player";
         //public static string mainDir = @"C:\Users\Adam\Documents\GitHub\Player";
 
         public MainWindow()
@@ -239,19 +239,19 @@ namespace Player
             switch (gestureType)
             {
                 case GestureType.JoinedHands:
-                    if(playlist != null)
+                    if(Playlist.Instance != null)
                     {
-                        if (playlist.backToPlaylist.Visibility == System.Windows.Visibility.Visible)
+                        if (Playlist.Instance.backToPlaylist.Visibility == System.Windows.Visibility.Visible)
                         {
-                            playlist.setPlaylistVisible();
-                            playlist.updateAudioList();
+                            Playlist.Instance.setPlaylistVisible();
+                            Playlist.Instance.updateAudioList();
                             //ViewSwitcher.Switch(playlist);
 
                         }
                         else
                         {
-                            playlist.setPlayerVisible();
-                            playlist.updateAudioList();
+                            Playlist.Instance.setPlayerVisible();
+                            Playlist.Instance.updateAudioList();
                         }
                     }
                     break;

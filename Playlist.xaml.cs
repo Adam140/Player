@@ -28,17 +28,28 @@ namespace Player
         ArrayList chosenList = new ArrayList();
         KinectTileButton activeElement = null;
         List<AudioFile> audioFiles = new List<AudioFile>();
+        private static Playlist instance;
 
+        private Playlist() { }
 
-        public Playlist()
+        public static Playlist Instance
         {
-        }
+              get 
+              {
+                 if (instance == null)
+                 {
+                     instance = new Playlist(MainWindow.mainDir);
+                 }
+                 return instance;
+              }
+         }
+
 
         public Playlist(string mainDir)
         {
             InitializeComponent();
-            audioList = Directory.GetFiles(mainDir + "/Audio");
-            coverList = Directory.GetFiles(mainDir + "/Covers");
+            audioList = Directory.GetFiles(mainDir + "/Multimedia/Audio");
+            coverList = Directory.GetFiles(mainDir + "/Multimedia/Covers");
             //aint i = 0;
             updateAudioList();
             for (int i = 0; i < audioList.Length; i++)
