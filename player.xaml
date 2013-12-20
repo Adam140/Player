@@ -104,7 +104,7 @@
                     <ColumnDefinition Width="15*"/>
                 </Grid.ColumnDefinitions>
                 <!--<k:KinectUserViewer Grid.Row="0" Grid.ColumnSpan="2"/>-->
-                <k:KinectScrollViewer Name="scrollPhoto" Grid.Row="0" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ContentMargin="50" ClipToBounds="True" Margin="50,50,50,1">
+                <k:KinectScrollViewer Name="scrollPhoto" Grid.Row="0" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ContentMargin="50" ClipToBounds="True" Margin="50,50,50,1" CanContentScroll="True">
                     <Image Name="photoElement"/>
                 </k:KinectScrollViewer>
                 <MediaElement  Grid.Row="0" Grid.ColumnSpan="2" Name="mediaElement" Width="Auto" UseLayoutRounding="True" 

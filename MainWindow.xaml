@@ -19,12 +19,16 @@
                     <RowDefinition Height="15*"/>
                     <RowDefinition Height="85*"/>
                 </Grid.RowDefinitions>
-                <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="91*"/>
+                    <ColumnDefinition Width="9*"/>
+                </Grid.ColumnDefinitions>
+                <Grid  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
                     <Grid.Background>
                         <SolidColorBrush Color="Black" Opacity="0.4"/>
                     </Grid.Background>
 
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="0">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                         <k:KinectTileButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonBack" Click="KinectButtonTopBar" BorderBrush="{x:Null}" Margin="10,0,0,0" Visibility="Collapsed">
                             <k:KinectTileButton.Background>
                                 <ImageBrush ImageSource="/Player;component/Resources/back.png" TileMode="FlipXY"/>
@@ -58,9 +62,36 @@
                                 <ImageBrush ImageSource="Resources/help.png" TileMode="FlipXY"/>
                             </k:KinectCircleButton.Background>
                         </k:KinectCircleButton>
+                        <k:KinectTileButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonLanguage0" Click="KinectButtonTopBar" BorderBrush="{x:Null}" Margin="10,0,0,0">
+                            <k:KinectTileButton.Background>
+                                <ImageBrush ImageSource="Resources/Flag_icon/flag_uk.png" TileMode="FlipXY"/>
+                            </k:KinectTileButton.Background>
+                        </k:KinectTileButton>
                     </StackPanel>
                 </Grid>
-                <Grid Grid.Row="1" Name="mainContent"/>
+                <Grid Name="languageContent" Grid.Column="1" Grid.Row="1" Visibility="Hidden" Panel.ZIndex="1">
+                    <Grid.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.4"/>
+                    </Grid.Background>
+                    <StackPanel>
+                        <k:KinectTileButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonLanguage1" Click="KinectButtonTopBar" BorderBrush="{x:Null}" Margin="10,0,0,0">
+                            <k:KinectTileButton.Background>
+                                <ImageBrush ImageSource="Resources/Flag_icon/flag_pl.png" TileMode="FlipXY"/>
+                            </k:KinectTileButton.Background>
+                        </k:KinectTileButton>
+                        <k:KinectTileButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonLanguage2" Click="KinectButtonTopBar" BorderBrush="{x:Null}" Margin="10,0,0,0">
+                            <k:KinectTileButton.Background>
+                                <ImageBrush ImageSource="Resources/Flag_icon/flag_gr.png" TileMode="FlipXY"/>
+                            </k:KinectTileButton.Background>
+                        </k:KinectTileButton>
+                        <k:KinectTileButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonLanguage3" Click="KinectButtonTopBar" BorderBrush="{x:Null}" Margin="10,0,0,0">
+                            <k:KinectTileButton.Background>
+                                <ImageBrush ImageSource="Resources/Flag_icon/flag_gn.png" TileMode="FlipXY"/>
+                            </k:KinectTileButton.Background>
+                        </k:KinectTileButton>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1" Name="mainContent" Grid.ColumnSpan="2"/>
                 <Grid Grid.Row="1" Name="helpContent" Margin="50" Visibility="Hidden">
                     <Grid.Background>
                         <SolidColorBrush Color="Black" Opacity="0.7"/>

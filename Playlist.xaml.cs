@@ -405,9 +405,12 @@ namespace Player
 
         public void setActiveSong(int index)
         {
-            UIElement tmp = scrollChosenList.Children[index];
-            KinectTileButton btn = (tmp as KinectTileButton);
-            setActiveSong(btn);
+            if (index >= 0 && index < scrollChosenList.Children.Count)
+            {
+                UIElement tmp = scrollChosenList.Children[index];
+                KinectTileButton btn = (tmp as KinectTileButton);
+                setActiveSong(btn);
+            }
             
         }
 
@@ -416,7 +419,7 @@ namespace Player
             btn.BorderBrush = Brushes.Gold;
             btn.BorderThickness = new Thickness(5.0);
 
-            if (this.activeElement != null)
+            if (this.activeElement != null && this.activeElement != btn)
                 this.activeElement.BorderThickness = new Thickness(0.0);
             
             this.activeElement = btn;

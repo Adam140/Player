@@ -33,8 +33,8 @@ namespace Player
         public Menu mainMenu;
         //public Playlist playlist;
         public static string[] chosenSongs;
-        public static string mainDir = @"D:\Studia\player";
-        //public static string mainDir = @"C:\Users\Adam\Documents\GitHub\Player";
+        //public static string mainDir = @"D:\Studia\player";
+        public static string mainDir = @"C:\Users\Adam\Documents\GitHub\Player";
 
         public MainWindow()
         {
@@ -150,6 +150,12 @@ namespace Player
                         bi.EndInit();
                         imageHelp.Source = bi;
                     break;
+                case "buttonLanguage0":
+                    if(languageContent.Visibility == Visibility.Visible)
+                        languageContent.Visibility = Visibility.Collapsed;
+                    else
+                        languageContent.Visibility = Visibility.Visible;
+                break;
             }
         }
 
@@ -237,11 +243,20 @@ namespace Player
 
         void gestureGenerator_GestureRecognized(GestureType gestureType, int trackingId)
         {
+            if (helpContent.Visibility == Visibility.Visible)
+            {
+                if (gestureType == GestureType.SwipeLeft)
+                {
+                    helpContent.Visibility = Visibility.Hidden;
+                    
+                }
+             return;
+            }
             player p = player.getInstance(null);
             switch (gestureType)
             {
                 case GestureType.JoinedHands:
-                    if(Playlist.Instance != null)
+                    if ("PlaylistScreen".Equals(currentViewName) && Playlist.Instance.scrollChosenList.Children.Count > 0)
                     {
                         if (Playlist.Instance.backToPlaylist.Visibility == System.Windows.Visibility.Visible)
                         {
@@ -257,7 +272,7 @@ namespace Player
                         }
                     }
                     break;
-                case GestureType.SwipeLeft:
+                case GestureType.SwipeDownLeft:
                     if(helpContent.Visibility == Visibility.Visible)
                         helpContent.Visibility = Visibility.Hidden;
                     else if(buttonBack.Visibility == Visibility.Visible)
@@ -266,30 +281,40 @@ namespace Player
                 case GestureType.WaveLeft:
                     if ("PlayerScreen".Equals(currentViewName) && p.mediaElement.IsLoaded && p.playerControlGrid.Visibility == Visibility.Visible)
                     {
-                        p.mediaElement.Position += new TimeSpan(0, 0, 0, 2, 0); ;
+                        p.mediaElement.Position += new TimeSpan(0, 0, 0, 5, 0); ;
                     }
                     break;
                 case GestureType.WaveRight:
                     if ("PlayerScreen".Equals(currentViewName) && p.mediaElement.IsLoaded && p.playerControlGrid.Visibility == Visibility.Visible)
                     {
-                        p.mediaElement.Position += new TimeSpan(0, 0, 0, 2, 0); ;
+                        p.mediaElement.Position += new TimeSpan(0, 0, 0, 5, 0); ;
                     }
                     break;
                 case GestureType.ZoomIn:
-                    if("PlayerScreen".Equals(currentViewName) && p.photoElement.Visibility == Visibility.Visible)
+                    if("PlayerScreen".Equals(currentViewName))
                     {
-                        p.photoElement.Height = p.photoElement.Height * 2;
-                        p.photoElement.Width = p.photoElement.Width * 2;
+                        if (p.currentPhoto)
+                        {
+                            p.photoElement.Height = p.photoElement.Height * 2;
+                            p.photoElement.Width = p.photoElement.Width * 2;
+                        }
+                        else if (p.mediaElement != null && p.isPlaying)
+                            p.mediaElement.Pause();
                     }
                     break;
                 case GestureType.ZoomOut:
-                    if ("PlayerScreen".Equals(currentViewName) && p.photoElement.Visibility == Visibility.Visible)
+                    if ("PlayerScreen".Equals(currentViewName))
                     {
-                        p.photoElement.Height = p.photoElement.Height * 0.5;
-                        p.photoElement.Width = p.photoElement.Width * 0.5;
+                        if (p.currentPhoto)
+                        {
+                            p.photoElement.Height = p.photoElement.Height * 0.5;
+                            p.photoElement.Width = p.photoElement.Width * 0.5;
+                        }
+                        else if (p.mediaElement != null && !p.isPlaying)
+                            p.playVideo();
                     }
                     break;
-                case GestureType.SwipeDownLeft:
+                case GestureType.SwipeLeft:
                     if ("PlayerScreen".Equals(currentViewName))
                     {
                         if (p.mediaElement != null && p.mediaElement.Position.TotalSeconds > 2)
@@ -301,7 +326,7 @@ namespace Player
                             p.nextToPlay(-1);
                     }
                     break;
-                case GestureType.SwipeDownRight:
+                case GestureType.SwipeRight:
                     if ("PlayerScreen".Equals(currentViewName) && p.mediaElement.IsLoaded && p.playerControlGrid.Visibility == Visibility.Visible)
                     {
                        p.nextToPlay(1);

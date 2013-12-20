@@ -29,8 +29,9 @@ namespace Player
         String[] filesList;
         String[] coversList;
         int currentFileIndex = 0;
+        public Boolean currentPhoto;
         DispatcherTimer timer;
-
+        public Boolean isPlaying = false;
         private static player instance = null;
 
         static public player getInstance(String[] array)
@@ -59,6 +60,9 @@ namespace Player
             coversList = Directory.GetFiles(MainWindow.mainDir + "/Multimedia/covers", "*");
             filesList = (from file in this.filesList let name = System.IO.Path.GetFileNameWithoutExtension(file) where !name.StartsWith("cover_") select file).ToArray();
             typeOfMedia(this.filesList[0], false);
+
+            photoElement.Width = 400;
+            photoElement.Height = 400;
         }
 
         public void UtilizeState(object mainDir)
@@ -70,6 +74,8 @@ namespace Player
         {
             mediaElement.Stop();
             mediaElement.Close();
+            passedTime.Content = "";
+            totalTime.Content = "";
         }
 
         private void KinectButtonPlayer(object sender, RoutedEventArgs e)
@@ -80,15 +86,17 @@ namespace Player
                 case "buttonPlay":
                     if (mediaElement.Source == null)
                         typeOfMedia(null, false);
-                    mediaElement.Play();
+                    playVideo();
                     timer.Start();
                     break;
                 case "buttonStop":
+                    isPlaying = false;
                     mediaElement.Stop();
                     passedTime.Content = "00:00";
                     timer.Stop();
                     break;
                 case "buttonPause":
+                    isPlaying = false;
                     mediaElement.Pause();
                     timer.Stop();
                     break;
@@ -114,6 +122,8 @@ namespace Player
                     break;
 
             }
+
+            Playlist.Instance.setActiveSong(currentFileIndex);
         }
 
         //private void SeekToMediaPosition(object sender, RoutedPropertyChangedEventArgs<double> args)
@@ -149,60 +159,66 @@ namespace Player
                 currentFileIndex = 0;
             if (currentFileIndex < 0)
                 currentFileIndex = filesList.Length - 1;
+            if (filesList.Length == 0)
+                return;
+
             typeOfMedia(filesList[currentFileIndex], true);
         }
 
         private void typeOfMedia(String file, Boolean playNow)
         {
+            playerControlGrid.Visibility = Visibility.Hidden;
+            photoControlGrid.Visibility = Visibility.Hidden;
+            photoElement.Visibility = Visibility.Hidden;
+            scrollPhoto.Visibility = Visibility.Hidden;
+            slider.Visibility = Visibility.Hidden;
+            timesLabel.Visibility = Visibility.Hidden;
+            mediaElement.Visibility = Visibility.Hidden;
+
+            if (filesList.Length == 0)
+                return;
             if (file == null || file.Equals(""))
                 file = filesList[currentFileIndex];
             var contentType = System.IO.Path.GetExtension(file);
-
-            if (Regex.Match(contentType, @"mp3").Success)  // musics
+            currentPhoto = false;
+            if (Regex.Match(contentType, @"(?i)(mp3)").Success)  // musics
             {
                 playerControlGrid.Visibility = Visibility.Visible;
-                photoControlGrid.Visibility = Visibility.Hidden;
                 photoElement.Visibility = Visibility.Visible;
                 scrollPhoto.Visibility = Visibility.Visible;
                 slider.Visibility = Visibility.Visible;
                 timesLabel.Visibility = Visibility.Visible;
-                mediaElement.Visibility = Visibility.Hidden;
                 mediaElement.Source = new Uri(file, UriKind.Absolute);
                 findAudioCover(file);
                 if (playNow)
-                    mediaElement.Play();
+                    playVideo();
             }
-            else if (Regex.Match(contentType, @"(wmv)|(mp4)").Success)    // video
+            else if (Regex.Match(contentType, @"(?i)((wmv)|(mp4))").Success)    // video
             {
                 mediaElement.Visibility = Visibility.Visible;
                 playerControlGrid.Visibility = Visibility.Visible;
-                photoControlGrid.Visibility = Visibility.Hidden;
-                photoElement.Visibility = Visibility.Hidden;
-                scrollPhoto.Visibility = Visibility.Hidden;
                 slider.Visibility = Visibility.Visible;
                 timesLabel.Visibility = Visibility.Visible;
                 mediaElement.Source = new Uri(file, UriKind.Absolute);
                 if (playNow)
-                    mediaElement.Play();
+                    playVideo();
             }
-            else if (Regex.Match(contentType, @"(jpg)|(gif)|(png)").Success)   // pictures
+            else if (Regex.Match(contentType, @"(?i)(jpg)|(gif)|(png)").Success)   // pictures
             {
                 mediaElement.Stop();
                 mediaElement.Close();
-                mediaElement.Visibility = Visibility.Hidden;
-                playerControlGrid.Visibility = Visibility.Hidden;
                 scrollPhoto.Visibility = Visibility.Visible;
                 photoControlGrid.Visibility = Visibility.Visible;
-                slider.Visibility = Visibility.Collapsed;
-                timesLabel.Visibility = Visibility.Collapsed;
                 BitmapImage bi3 = new BitmapImage();
                 bi3.BeginInit();
                 bi3.UriSource = new Uri(file, UriKind.Absolute);
                 bi3.EndInit();
                 photoElement.Source = bi3;
                 photoElement.Visibility = Visibility.Visible;
+                currentPhoto = true;
             }
-
+            else
+                photoControlGrid.Visibility = Visibility.Visible;
         }
 
         private void findAudioCover(String file)
@@ -246,12 +262,39 @@ namespace Player
 
         }
 
-        public static void Scale(Image img, double resize)
+       public void sortedContent(String type)
         {
-            //original height / original width x new width = new height
-            var newH = img.Height / img.Width; 
+           switch(type)
+           {
+               case "music":
+                   filesList = Directory.GetFiles(MainWindow.mainDir + "/Multimedia", "*.mp3", SearchOption.AllDirectories);
+                   break;
+               case "video":
+                   filesList = Directory.GetFiles(MainWindow.mainDir + "/Multimedia", "*.mp4", SearchOption.AllDirectories);
+                   break;
+               case "photo":
+                   filesList = Directory.GetFiles(MainWindow.mainDir + "/Multimedia", "*", SearchOption.AllDirectories);
+                   List<String> temp = new List<String>();
+
+                    foreach(String c in filesList)
+                    {
+                        if (c.EndsWith("png") || c.EndsWith("jpg"))
+                            temp.Add(c);
+                    }
+                    filesList = temp.ToArray();
+
+                   break;
+           }
+           this.Destroy();
+           typeOfMedia(null,false);
         }
 
+        public void playVideo()
+        {
+            isPlaying = true;
+            mediaElement.Play();
+            timer.Start();
+        }
                 
         public void setFileList(String[] newFileList)
         {
@@ -259,7 +302,7 @@ namespace Player
             {
                 this.filesList = newFileList;
                 currentFileIndex = 0;
-                nextToPlay(0);
+ 
             }
         }
 

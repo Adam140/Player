@@ -16,36 +16,90 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <k:KinectTileButton Label="Multimedia"  Height="Auto" Width="Auto" HorizontalLabelAlignment="Center" HorizontalContentAlignment="Center" x:Name="buttonMultimedia" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,-1,20,20" FontSize="26" Padding="0" VerticalContentAlignment="Center">
+            <k:KinectTileButton Label="Multimedia"  Height="Auto" Width="Auto" HorizontalLabelAlignment="Center" HorizontalContentAlignment="Center" x:Name="buttonMultimedia" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,-1,20,20" FontSize="26" Padding="0" VerticalContentAlignment="Center" RenderTransformOrigin="0.581,0.506" BorderThickness="0">
                 <k:KinectTileButton.Background>
-                    <ImageBrush ImageSource="Resources/Menu_icon/multimedia.png" TileMode="FlipXY"/>
+                    <ImageBrush ImageSource="Resources/Menu_icon/multimedia.png">
+                        <ImageBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="0.8" ScaleX="0.8"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform X="0.1" Y="-0.1"/>
+                            </TransformGroup>
+                        </ImageBrush.RelativeTransform>
+                    </ImageBrush>
                 </k:KinectTileButton.Background>
             </k:KinectTileButton>
             <k:KinectTileButton Label="Video" Height="Auto" Width="Auto" HorizontalLabelAlignment="Center" HorizontalContentAlignment="Stretch" x:Name="buttonVideo" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,0,20,20" FontSize="26">
                 <k:KinectTileButton.Background>
-                    <ImageBrush ImageSource="Resources/Menu_icon/video.png" TileMode="FlipXY"/>
+                    <ImageBrush ImageSource="Resources/Menu_icon/video.png">
+                        <ImageBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="0.8" ScaleX="0.8"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform X="0.1" Y="-0.1"/>
+                            </TransformGroup>
+                        </ImageBrush.RelativeTransform>
+                    </ImageBrush>
                 </k:KinectTileButton.Background>
             </k:KinectTileButton>
-            <k:KinectTileButton Label="Musics" Height="Auto" Width="Auto" HorizontalLabelAlignment="Center" HorizontalContentAlignment="Stretch" x:Name="buttonAudio" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,0,20,20" FontSize="26">
+            <k:KinectTileButton Label="Audio" Height="Auto" Width="Auto" HorizontalLabelAlignment="Center" HorizontalContentAlignment="Stretch" x:Name="buttonAudio" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,0,20,20" FontSize="26">
                 <k:KinectTileButton.Background>
-                    <ImageBrush ImageSource="Resources/Menu_icon/audio.png" TileMode="FlipXY"/>
+                    <ImageBrush ImageSource="Resources/Menu_icon/audio.png">
+                        <ImageBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="0.8" ScaleX="0.8"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform X="0.1" Y="-0.1"/>
+                            </TransformGroup>
+                        </ImageBrush.RelativeTransform>
+                    </ImageBrush>
                 </k:KinectTileButton.Background>
             </k:KinectTileButton>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <k:KinectTileButton Label="TOP" Height="Auto" Width="Auto" HorizontalLabelAlignment="Center" HorizontalContentAlignment="Stretch" x:Name="buttonPictures" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,0,20,20" FontSize="26">
                 <k:KinectTileButton.Background>
-                    <ImageBrush ImageSource="Resources/Menu_icon/top.png" TileMode="FlipXY"/>
+                    <ImageBrush ImageSource="Resources/Menu_icon/top.png">
+                        <ImageBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="0.8" ScaleX="0.8"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform X="0.1" Y="-0.1"/>
+                            </TransformGroup>
+                        </ImageBrush.RelativeTransform>
+                    </ImageBrush>
                 </k:KinectTileButton.Background>
             </k:KinectTileButton>
-            <k:KinectTileButton Label="Traffic map" Height="Auto" Width="Auto" HorizontalLabelAlignment="Center" HorizontalContentAlignment="Stretch" x:Name="buttonTraffic" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,0,20,20" FontSize="26">
+            <k:KinectTileButton Label="Images" Height="Auto" Width="Auto" HorizontalLabelAlignment="Center" HorizontalContentAlignment="Stretch" x:Name="buttonImage" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,0,20,20" FontSize="26">
                 <k:KinectTileButton.Background>
-                    <ImageBrush ImageSource="Resources/Menu_icon/traffic.png" TileMode="FlipXY"/>
+                    <ImageBrush ImageSource="Resources/Menu_icon/images.png">
+                        <ImageBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="0.8" ScaleX="0.8"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform X="0.1" Y="-0.1"/>
+                            </TransformGroup>
+                        </ImageBrush.RelativeTransform>
+                    </ImageBrush>
                 </k:KinectTileButton.Background>
             </k:KinectTileButton>
-            <k:KinectTileButton Label="Settings" Height="Auto" Width="Auto" HorizontalLabelAlignment="Center" HorizontalContentAlignment="Stretch" x:Name="buttonSettings" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,0,20,20" FontSize="26">
+            <k:KinectTileButton Label="Playlist" Height="Auto" Width="Auto" HorizontalLabelAlignment="Center" HorizontalContentAlignment="Stretch" x:Name="buttonPlaylist" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,0,20,20" FontSize="26">
                 <k:KinectTileButton.Background>
-                    <ImageBrush ImageSource="Resources/Menu_icon/settings.png" TileMode="FlipXY"/>
+                    <ImageBrush ImageSource="Resources/Menu_icon/playlist.png">
+                        <ImageBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="0.8" ScaleX="0.8"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform X="0.1" Y="-0.1"/>
+                            </TransformGroup>
+                        </ImageBrush.RelativeTransform>
+                    </ImageBrush>
                 </k:KinectTileButton.Background>
             </k:KinectTileButton>
         </StackPanel>
