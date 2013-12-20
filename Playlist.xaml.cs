@@ -369,7 +369,7 @@ namespace Player
             songInformationGrid.Visibility = System.Windows.Visibility.Collapsed;
             songCover.Visibility = System.Windows.Visibility.Collapsed;
             allSongsGrid.Visibility = System.Windows.Visibility.Collapsed;
-            playerContainer.Children.Add(new player(getChosenSongs()));
+            playerContainer.Children.Add(player.getInstance(getChosenSongs()));
             playerContainer.Visibility = System.Windows.Visibility.Visible;
             playlistPlay.Visibility = System.Windows.Visibility.Collapsed;
             backToPlaylist.Visibility = System.Windows.Visibility.Visible;
@@ -380,7 +380,7 @@ namespace Player
             songInformationGrid.Visibility = System.Windows.Visibility.Visible;
             songCover.Visibility = System.Windows.Visibility.Visible;
             allSongsGrid.Visibility = System.Windows.Visibility.Visible;
-            playerContainer.Children.Add(new player(getChosenSongs()));
+            playerContainer.Children.Add(player.getInstance(getChosenSongs()));
             playerContainer.Visibility = System.Windows.Visibility.Collapsed;
             playlistPlay.Visibility = System.Windows.Visibility.Visible;
             backToPlaylist.Visibility = System.Windows.Visibility.Collapsed;

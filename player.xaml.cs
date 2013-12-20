@@ -22,7 +22,7 @@ using System.Windows.Threading;
 namespace Player
 {
     /// <summary>
-    /// Interaction logic for screen1.xaml
+    /// Player for playing music, movie and display images. It implemented singleton pattern
     /// </summary>
     public partial class player : UserControl, ISwitchable
     {
@@ -36,7 +36,10 @@ namespace Player
         static public player getInstance(String[] array)
         {
             if (instance == null)
+            {
                 instance = new player(array);
+                instance.nextToPlay(0);
+            }
             else
                 instance.setFileList(array);
 
@@ -58,7 +61,7 @@ namespace Player
 
             coversList = Directory.GetFiles(MainWindow.mainDir + "/Multimedia/covers", "*");
             filesList = (from file in this.filesList let name = System.IO.Path.GetFileNameWithoutExtension(file) where !name.StartsWith("cover_") select file).ToArray();
-            typeOfMedia(this.filesList[0], false);
+            typeOfMedia(this.filesList[0], true);
         }
 
         public void UtilizeState(object mainDir)
