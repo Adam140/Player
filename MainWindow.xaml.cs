@@ -90,6 +90,8 @@ namespace Player
             currentViewName = view.Name;
             mainContent.Children.Clear();
             mainContent.Children.Add(view);
+            //if ("PlayerScreen".Equals(currentViewName))
+            //    ((player)view).nextToPlay(0);
         }
 
         public void Navigate(UserControl view, object state)

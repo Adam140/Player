@@ -38,7 +38,6 @@ namespace Player
             if (instance == null)
             {
                 instance = new player(array);
-                instance.nextToPlay(0);
             }
             else
                 instance.setFileList(array);
@@ -51,8 +50,6 @@ namespace Player
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(400);
             timer.Tick += new EventHandler(timer_Tick);
-            photoElement.Width = 100;
-            photoElement.Height = 100;
 
             if (filesList == null || filesList.Length == 0 )
                this.filesList = Directory.GetFiles(MainWindow.mainDir + @"\Multimedia");
@@ -61,7 +58,7 @@ namespace Player
 
             coversList = Directory.GetFiles(MainWindow.mainDir + "/Multimedia/covers", "*");
             filesList = (from file in this.filesList let name = System.IO.Path.GetFileNameWithoutExtension(file) where !name.StartsWith("cover_") select file).ToArray();
-            typeOfMedia(this.filesList[0], true);
+            typeOfMedia(this.filesList[0], false);
         }
 
         public void UtilizeState(object mainDir)
@@ -85,7 +82,6 @@ namespace Player
                         typeOfMedia(null, false);
                     mediaElement.Play();
                     timer.Start();
-
                     break;
                 case "buttonStop":
                     mediaElement.Stop();
@@ -167,12 +163,13 @@ namespace Player
                 playerControlGrid.Visibility = Visibility.Visible;
                 photoControlGrid.Visibility = Visibility.Hidden;
                 photoElement.Visibility = Visibility.Visible;
+                scrollPhoto.Visibility = Visibility.Visible;
                 slider.Visibility = Visibility.Visible;
                 timesLabel.Visibility = Visibility.Visible;
                 mediaElement.Visibility = Visibility.Hidden;
                 mediaElement.Source = new Uri(file, UriKind.Absolute);
                 findAudioCover(file);
-                if(playNow)
+                if (playNow)
                     mediaElement.Play();
             }
             else if (Regex.Match(contentType, @"(wmv)|(mp4)").Success)    // video
@@ -181,6 +178,7 @@ namespace Player
                 playerControlGrid.Visibility = Visibility.Visible;
                 photoControlGrid.Visibility = Visibility.Hidden;
                 photoElement.Visibility = Visibility.Hidden;
+                scrollPhoto.Visibility = Visibility.Hidden;
                 slider.Visibility = Visibility.Visible;
                 timesLabel.Visibility = Visibility.Visible;
                 mediaElement.Source = new Uri(file, UriKind.Absolute);
@@ -193,6 +191,7 @@ namespace Player
                 mediaElement.Close();
                 mediaElement.Visibility = Visibility.Hidden;
                 playerControlGrid.Visibility = Visibility.Hidden;
+                scrollPhoto.Visibility = Visibility.Visible;
                 photoControlGrid.Visibility = Visibility.Visible;
                 slider.Visibility = Visibility.Collapsed;
                 timesLabel.Visibility = Visibility.Collapsed;
@@ -243,19 +242,26 @@ namespace Player
 
             bi3.EndInit();
             photoElement.Source = bi3;
+
+
         }
 
-        public static void Scale(Image img, int maxWidth, int maxHeight)
+        public static void Scale(Image img, double resize)
         {
-            var st = (ScaleTransform)img.RenderTransform;
-            double zoom = .2;
-            st.ScaleX += zoom;
-            st.ScaleY += zoom;
+            //original height / original width x new width = new height
+            var newH = img.Height / img.Width; 
         }
-        public void setFileList(String[] fileList)
+
+                
+        public void setFileList(String[] newFileList)
         {
-            if (fileList != null)
-                this.filesList = filesList;
+            if (newFileList != null)
+            {
+                this.filesList = newFileList;
+                currentFileIndex = 0;
+                nextToPlay(0);
+            }
         }
+
     }
 }

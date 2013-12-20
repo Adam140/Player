@@ -104,11 +104,11 @@
                     <ColumnDefinition Width="15*"/>
                 </Grid.ColumnDefinitions>
                 <!--<k:KinectUserViewer Grid.Row="0" Grid.ColumnSpan="2"/>-->
-                <k:KinectScrollViewer Name="scrollPhoto" Grid.Row="0" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ContentMargin="50" ClipToBounds="True" Margin="50,50,50,1">
+                <k:KinectScrollViewer Name="scrollPhoto" Grid.Row="0" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ContentMargin="50" ClipToBounds="True" Margin="50,50,50,1">
                     <Image Name="photoElement"/>
                 </k:KinectScrollViewer>
-                <MediaElement  Grid.Row="0" Grid.ColumnSpan="2" Name="mediaElement" Width="Auto" LoadedBehavior="Manual" UseLayoutRounding="True" 
-                                   Volume="1" UnloadedBehavior="Stop" Height="Auto" MediaOpened="mediaOpened" MediaEnded="mediaEnded" ScrubbingEnabled="True" Visibility="Hidden"/>
+                <MediaElement  Grid.Row="0" Grid.ColumnSpan="2" Name="mediaElement" Width="Auto" UseLayoutRounding="True" 
+                                   Volume="1" UnloadedBehavior="Stop" Height="Auto" MediaOpened="mediaOpened" MediaEnded="mediaEnded" ScrubbingEnabled="True" Visibility="Hidden" LoadedBehavior="Manual"/>
                 <Slider Name="slider" IsMoveToPointEnabled="True" HorizontalContentAlignment="Stretch" Grid.Row="1" Grid.Column="0" VerticalContentAlignment="Center" Margin="20,0,10,0" VerticalAlignment="Center" Visibility="Hidden"/>
                 <StackPanel Name="timesLabel" Grid.Row="1" Grid.Column="1" Margin="0,0,10,0" Orientation="Horizontal" HorizontalAlignment="Center">
                     <Label Name="passedTime" Padding="0,5" Foreground="White" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
