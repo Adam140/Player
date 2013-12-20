@@ -16,7 +16,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30*" />
             <ColumnDefinition Width="40*" />
-            <ColumnDefinition Width="30*" />
+            <ColumnDefinition Width="25*" />
         </Grid.ColumnDefinitions>
         <!--<k:KinectRegion Grid.Row="0" Grid.Column="0" Name="kinectRegion"></k:KinectRegion>-->
 

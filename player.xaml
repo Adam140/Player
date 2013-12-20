@@ -5,53 +5,53 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:k="http://schemas.microsoft.com/kinect/2013"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="600" Name="PlayerScreen">
+             d:DesignHeight="1000" d:DesignWidth="800" Name="PlayerScreen">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80*"/>
-            <RowDefinition Height="20*"/>
+            <RowDefinition Height="82*"/>
+            <RowDefinition Height="18*"/>
         </Grid.RowDefinitions>      
 <!-- 
      ***********************************************************
                     Buttons for controling video
      ***********************************************************
 -->
-        <Grid Grid.Row="1" Name="playerControlGrid" Visibility="Hidden">
+        <Grid Grid.Row="1" Name="playerControlGrid" Visibility="Visible">
             <Grid.Background>
                 <SolidColorBrush Color="Black" Opacity="0.6"/>
             </Grid.Background>
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonPlay" Click="KinectButtonPlayer" BorderBrush="{x:Null}" Margin="0,0,40,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
+                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonPlay" Click="KinectButtonPlayer" BorderBrush="{x:Null}" Margin="0,0,30,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
                     <k:KinectCircleButton.Background>
                         <ImageBrush ImageSource="Resources/Player_icon/play.png" TileMode="FlipXY"/>
                     </k:KinectCircleButton.Background>
                 </k:KinectCircleButton>
-                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonPause" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,40,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
+                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonPause" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,30,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
                     <k:KinectCircleButton.Background>
                         <ImageBrush ImageSource="Resources/Player_icon/pause.png" TileMode="FlipXY"/>
                     </k:KinectCircleButton.Background>
                 </k:KinectCircleButton>
-                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonStop" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,40,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
+                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonStop" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,30,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
                     <k:KinectCircleButton.Background>
                         <ImageBrush ImageSource="Resources/Player_icon/stop.png" TileMode="FlipXY"/>
                     </k:KinectCircleButton.Background>
                 </k:KinectCircleButton>
-                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonRewind" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,40,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
+                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonRewind" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,30,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
                     <k:KinectCircleButton.Background>
                         <ImageBrush ImageSource="Resources/Player_icon/rewind.png" TileMode="FlipXY"/>
                     </k:KinectCircleButton.Background>
                 </k:KinectCircleButton>
-                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonForward" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,40,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
+                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonForward" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,30,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
                     <k:KinectCircleButton.Background>
                         <ImageBrush ImageSource="Resources/Player_icon/forward.png" TileMode="FlipXY"/>
                     </k:KinectCircleButton.Background>
                 </k:KinectCircleButton>
-                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonFirst" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,40,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
+                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonFirst" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,30,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
                     <k:KinectCircleButton.Background>
                         <ImageBrush ImageSource="Resources/Player_icon/first.png" TileMode="FlipXY"/>
                     </k:KinectCircleButton.Background>
                 </k:KinectCircleButton>
-                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonLast" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,40,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
+                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonLast" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,30,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
                     <k:KinectCircleButton.Background>
                         <ImageBrush ImageSource="Resources/Player_icon/last.png" TileMode="FlipXY"/>
                     </k:KinectCircleButton.Background>
@@ -63,12 +63,12 @@
      ***********************************************************
 -->
         </Grid>
-        <Grid Grid.Row="1" Name="photoControlGrid" Visibility="Visible">
+        <Grid Grid.Row="1" Name="photoControlGrid" Visibility="Hidden">
             <Grid.Background>
                 <SolidColorBrush Color="Black" Opacity="0.6"/>
             </Grid.Background>
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonPrevious" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,40,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
+                <k:KinectCircleButton Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonPrevious" Click="KinectButtonPlayer" BorderBrush="{x:Null}"  Margin="0,0,30,0" ContentForeground="{x:Null}" Foreground="{x:Null}">
                     <k:KinectCircleButton.Background>
                         <ImageBrush ImageSource="Resources/Player_icon/rewind.png" TileMode="FlipXY"/>
                     </k:KinectCircleButton.Background>
