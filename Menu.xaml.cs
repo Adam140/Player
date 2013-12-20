@@ -41,25 +41,17 @@ namespace Player
                     ViewSwitcher.Switch(player.getInstance(null));
                     break;
                 case "buttonAudio":
-                    if (mainWindow.playlist != null)
-                    {
-                        mainWindow.playlist.setPlaylistVisible();
-                        mainWindow.playlist.updateAudioList();
-                        ViewSwitcher.Switch(mainWindow.playlist);
-                    }
-                    else
-                        ViewSwitcher.Switch(mainWindow.playlist = new Playlist(MainWindow.mainDir + @"\Multimedia"));
+                        Playlist.Instance.setPlaylistVisible();
+                        Playlist.Instance.updateAudioList();
+                        ViewSwitcher.Switch(Playlist.Instance);
+
                     break;
 
                 case "buttonPictures":
-                    if (mainWindow.playlist != null)
-                    {
-                        mainWindow.playlist.setPlaylistVisible();
-                        mainWindow.playlist.updateAudioListTop10();
-                        ViewSwitcher.Switch(mainWindow.playlist);
-                    }
-                    else
-                        ViewSwitcher.Switch(mainWindow.playlist = new Playlist(MainWindow.mainDir + @"\Multimedia"));
+
+                        Playlist.Instance.setPlaylistVisible();
+                        Playlist.Instance.updateAudioListTop10();
+                        ViewSwitcher.Switch(Playlist.Instance);
                     break;
             }
 
