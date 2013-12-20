@@ -6,44 +6,44 @@
              xmlns:k="http://schemas.microsoft.com/kinect/2013"
              x:Class="Player.Menu"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="800" x:Name="MainScreen">
+             d:DesignHeight="1000" d:DesignWidth="1000" x:Name="MainScreen">
     <Grid x:Name="menuGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="30*"/>
-            <RowDefinition Height="30*"/>
-            <RowDefinition Height="20*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="15*"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <k:KinectTileButton Label="Multimedia"  Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonMultimedia" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,0,20,20" FontSize="12">
+            <k:KinectTileButton Label="Multimedia"  Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonMultimedia" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,0,20,20" FontSize="30">
                 <k:KinectTileButton.Background>
                     <ImageBrush ImageSource="Resources/Menu_icon/multimedia.png" TileMode="FlipXY"/>
                 </k:KinectTileButton.Background>
             </k:KinectTileButton>
-            <k:KinectTileButton Label="Video" Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonVideo" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,0,20,20" FontSize="12">
+            <k:KinectTileButton Label="Video" Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonVideo" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,0,20,20" FontSize="30">
                 <k:KinectTileButton.Background>
                     <ImageBrush ImageSource="Resources/Menu_icon/video.png" TileMode="FlipXY"/>
                 </k:KinectTileButton.Background>
             </k:KinectTileButton>
-            <k:KinectTileButton Label="Musics" Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonAudio" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,0,20,20" FontSize="12">
+            <k:KinectTileButton Label="Musics" Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonAudio" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,0,20,20" FontSize="30">
                 <k:KinectTileButton.Background>
                     <ImageBrush ImageSource="Resources/Menu_icon/audio.png" TileMode="FlipXY"/>
                 </k:KinectTileButton.Background>
             </k:KinectTileButton>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <k:KinectTileButton Label="TOP" Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonPictures" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,0,20,20" FontSize="12">
+            <k:KinectTileButton Label="TOP" Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonPictures" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,0,20,20" FontSize="30">
                 <k:KinectTileButton.Background>
                     <ImageBrush ImageSource="Resources/Menu_icon/top.png" TileMode="FlipXY"/>
                 </k:KinectTileButton.Background>
             </k:KinectTileButton>
-            <k:KinectTileButton Label="Traffic map" Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonTraffic" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,0,20,20" FontSize="12">
+            <k:KinectTileButton Label="Traffic map" Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonTraffic" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,0,20,20" FontSize="30">
                 <k:KinectTileButton.Background>
                     <ImageBrush ImageSource="Resources/Menu_icon/traffic.png" TileMode="FlipXY"/>
                 </k:KinectTileButton.Background>
             </k:KinectTileButton>
-            <k:KinectTileButton Label="Settings" Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonSettings" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,0,20,20" FontSize="12">
+            <k:KinectTileButton Label="Settings" Height="Auto" Width="Auto" HorizontalLabelAlignment="Stretch" HorizontalContentAlignment="Stretch" x:Name="buttonSettings" Click="KinectButtonMenu" BorderBrush="{x:Null}" Margin="10,0,20,20" FontSize="30">
                 <k:KinectTileButton.Background>
                     <ImageBrush ImageSource="Resources/Menu_icon/settings.png" TileMode="FlipXY"/>
                 </k:KinectTileButton.Background>
