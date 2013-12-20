@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:k="http://schemas.microsoft.com/kinect/2013"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="800">
+             d:DesignHeight="300" d:DesignWidth="800" Name="PlaylistScreen">
     <Grid >
 
             <Grid.RowDefinitions>
@@ -16,7 +16,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30*" />
             <ColumnDefinition Width="40*" />
-            <ColumnDefinition Width="30*" />
+            <ColumnDefinition Width="25*" />
         </Grid.ColumnDefinitions>
         <!--<k:KinectRegion Grid.Row="0" Grid.Column="0" Name="kinectRegion"></k:KinectRegion>-->
 
