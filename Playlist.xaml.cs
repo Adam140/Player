@@ -381,6 +381,8 @@ namespace Player
             songCover.Visibility = System.Windows.Visibility.Collapsed;
             allSongsGrid.Visibility = System.Windows.Visibility.Collapsed;
             playerContainer.Children.Add(player.getInstance(getChosenSongs()));
+            player.getInstance(getChosenSongs()).typeOfMedia(null, false);
+            this.setActiveSong(0);
             playerContainer.Visibility = System.Windows.Visibility.Visible;
             playlistPlay.Visibility = System.Windows.Visibility.Collapsed;
             backToPlaylist.Visibility = System.Windows.Visibility.Visible;

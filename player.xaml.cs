@@ -165,7 +165,7 @@ namespace Player
             typeOfMedia(filesList[currentFileIndex], true);
         }
 
-        private void typeOfMedia(String file, Boolean playNow)
+        public void typeOfMedia(String file, Boolean playNow)
         {
             playerControlGrid.Visibility = Visibility.Hidden;
             photoControlGrid.Visibility = Visibility.Hidden;
@@ -303,6 +303,10 @@ namespace Player
                 this.filesList = newFileList;
                 currentFileIndex = 0;
  
+            }
+            else
+            {
+                instance = new player(null);
             }
         }
 
