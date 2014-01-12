@@ -38,19 +38,19 @@ namespace Player
             switch (name)
             {
                 case "buttonMultimedia":
-                    ViewSwitcher.Switch(player.getInstance(null));
+                    ViewSwitcher.Switch(player.getInstance(null, true));
                     break;
                 case "buttonVideo":
                     ViewSwitcher.Switch(player.getInstance(null));
-                    player.getInstance(null).sortedContent("video");
+                    player.getInstance(null, true).sortedContent("video");
                     break;
                 case "buttonImage":
                     ViewSwitcher.Switch(player.getInstance(null));
-                    player.getInstance(null).sortedContent("photo");
+                    player.getInstance(null, true).sortedContent("photo");
                     break;
                 case "buttonAudio":
                     ViewSwitcher.Switch(player.getInstance(null));
-                    player.getInstance(null).sortedContent("music");
+                    player.getInstance(null, true).sortedContent("music");
                     break;
                 case "buttonPlaylist":
                         Playlist.Instance.setPlaylistVisible();

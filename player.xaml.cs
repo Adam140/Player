@@ -34,14 +34,14 @@ namespace Player
         public Boolean isPlaying = false;
         private static player instance = null;
 
-        static public player getInstance(String[] array)
+        static public player getInstance(String[] array, Boolean newList = false)
         {
             if (instance == null)
             {
                 instance = new player(array);
             }
             else
-                instance.setFileList(array);
+                instance.setFileList(array, newList);
 
             return instance;
         }
@@ -203,7 +203,7 @@ namespace Player
                 if (playNow)
                     playVideo();
             }
-            else if (Regex.Match(contentType, @"(?i)(jpg)|(gif)|(png)").Success)   // pictures
+            else if (Regex.Match(contentType, @"(?i)(jpg)|(gif)|(png)|(jpeg)").Success)   // pictures
             {
                 mediaElement.Stop();
                 mediaElement.Close();
@@ -296,7 +296,7 @@ namespace Player
             timer.Start();
         }
                 
-        public void setFileList(String[] newFileList)
+        public void setFileList(String[] newFileList, Boolean newList)
         {
             if (newFileList != null)
             {
@@ -304,9 +304,12 @@ namespace Player
                 currentFileIndex = 0;
  
             }
-            else
+            else if(newList)
             {
-                instance = new player(null);
+                this.filesList = Directory.GetFiles(MainWindow.mainDir + @"\Multimedia");
+                coversList = Directory.GetFiles(MainWindow.mainDir + "/Multimedia/covers", "*");
+                filesList = (from file in this.filesList let name = System.IO.Path.GetFileNameWithoutExtension(file) where !name.StartsWith("cover_") select file).ToArray();
+                typeOfMedia(this.filesList[0], false);
             }
         }
 
