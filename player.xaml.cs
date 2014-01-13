@@ -167,6 +167,11 @@ namespace Player
 
         public void typeOfMedia(String file, Boolean playNow)
         {
+            if (currentFileIndex >= filesList.Length)
+                currentFileIndex = 0;
+            if (currentFileIndex < 0)
+                currentFileIndex = filesList.Length - 1;
+
             playerControlGrid.Visibility = Visibility.Hidden;
             photoControlGrid.Visibility = Visibility.Hidden;
             photoElement.Visibility = Visibility.Hidden;

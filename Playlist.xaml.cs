@@ -346,7 +346,8 @@ namespace Player
 
         public void Destroy()
         {
-
+            player.getInstance(null).Destroy();
+            playerContainer.Children.Clear();
         }
 
         public void UtilizeState(object mainDir)
