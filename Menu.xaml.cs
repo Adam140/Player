@@ -41,7 +41,7 @@ namespace Player
                     ViewSwitcher.Switch(player.getInstance(null, true));
                     break;
                 case "buttonVideo":
-                    ViewSwitcher.Switch(player.getInstance(null));
+                    ViewSwitcher.Switch(player.getInstance(null, true));
                     player.getInstance(null, true).sortedContent("video");
                     break;
                 case "buttonImage":

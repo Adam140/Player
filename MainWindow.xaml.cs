@@ -275,23 +275,23 @@ namespace Player
                 case GestureType.SwipeDownLeft:
                     if(helpContent.Visibility == Visibility.Visible)
                         helpContent.Visibility = Visibility.Hidden;
-                    else if(buttonBack.Visibility == Visibility.Visible)
-                        ViewSwitcher.Switch(mainMenu);
+                    //else if(buttonBack.Visibility == Visibility.Visible)
+                      //  ViewSwitcher.Switch(mainMenu);
                     break;
                 case GestureType.WaveLeft:
-                    if ("PlayerScreen".Equals(currentViewName) && p.mediaElement.IsLoaded && p.playerControlGrid.Visibility == Visibility.Visible)
+                    if (("PlayerScreen".Equals(currentViewName) || "PlaylistScreen".Equals(currentViewName)) && p.mediaElement.IsLoaded && p.playerControlGrid.Visibility == Visibility.Visible)
                     {
                         p.mediaElement.Position += new TimeSpan(0, 0, 0, 5, 0); ;
                     }
                     break;
                 case GestureType.WaveRight:
-                    if ("PlayerScreen".Equals(currentViewName) && p.mediaElement.IsLoaded && p.playerControlGrid.Visibility == Visibility.Visible)
+                    if (("PlayerScreen".Equals(currentViewName) || "PlaylistScreen".Equals(currentViewName)) && p.mediaElement.IsLoaded && p.playerControlGrid.Visibility == Visibility.Visible)
                     {
                         p.mediaElement.Position += new TimeSpan(0, 0, 0, 5, 0); ;
                     }
                     break;
                 case GestureType.ZoomIn:
-                    if("PlayerScreen".Equals(currentViewName))
+                    if ("PlayerScreen".Equals(currentViewName) || "PlaylistScreen".Equals(currentViewName))
                     {
                         if (p.currentPhoto)
                         {
@@ -303,7 +303,7 @@ namespace Player
                     }
                     break;
                 case GestureType.ZoomOut:
-                    if ("PlayerScreen".Equals(currentViewName))
+                    if ("PlayerScreen".Equals(currentViewName) || "PlaylistScreen".Equals(currentViewName))
                     {
                         if (p.currentPhoto)
                         {
@@ -315,7 +315,7 @@ namespace Player
                     }
                     break;
                 case GestureType.SwipeLeft:
-                    if ("PlayerScreen".Equals(currentViewName))
+                    if (("PlayerScreen".Equals(currentViewName) || "PlaylistScreen".Equals(currentViewName)))
                     {
                         if (p.mediaElement != null && p.mediaElement.Position.TotalSeconds > 2)
                         {
@@ -327,7 +327,7 @@ namespace Player
                     }
                     break;
                 case GestureType.SwipeRight:
-                    if ("PlayerScreen".Equals(currentViewName) && p.mediaElement.IsLoaded && p.playerControlGrid.Visibility == Visibility.Visible)
+                    if (("PlayerScreen".Equals(currentViewName) || "PlaylistScreen".Equals(currentViewName)) && p.mediaElement.IsLoaded && p.playerControlGrid.Visibility == Visibility.Visible)
                     {
                        p.nextToPlay(1);
                     }
